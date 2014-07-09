@@ -49,4 +49,20 @@ public class CCCommand {
 		name += p.getName();
 		return name;
 	}
+	
+	public String getPlayerName(String playerName) {
+		
+		String name = null;
+		
+		if(playerName == "CONSOLE") {
+			name = ChatColor.RED+"CONSOLE";
+		}
+		else {
+			Player p = Bukkit.getPlayer(playerName);
+			if(p.isOp())
+				name += ChatColor.RED;
+			name += p.getName();
+		}
+		return name;
+	}
 }
