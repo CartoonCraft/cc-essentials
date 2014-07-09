@@ -25,6 +25,10 @@
       <id>bukkit-repo</id>
       <url>http://repo.bukkit.org/content/groups/public/</url>
     </repository>
+    <repository>
+      <id>lagmeter-repo</id>
+      <url>http://msp.cartooncraft.fr/lagmeter/</url>
+    </repository>
   </repositories>
   
   <dependencies>
@@ -35,5 +39,15 @@
       <type>jar</type>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+      <groupId>com.webkonsept.minecraft.lagmeter</groupId>
+      <artifactId>LagMeter</artifactId>
+      <version>1.16.0</version>
+      <type>jar</type>
+      <scope>provided</scope>
+    </dependency>
   </dependencies>
+  <modules>
+  	<module>lag</module>
+  </modules>
 </project>
