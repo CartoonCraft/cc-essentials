@@ -26,6 +26,7 @@ public class HealCommand extends CCCommand {
 			else if(args.length == 1) {
 				if(Bukkit.getPlayer(args[0]) != null) {
 					Player p = Bukkit.getPlayer(args[0]);
+					p.setHealth(20);
 					p.setFoodLevel(20);
 					p.setExhaustion(5F);
 					sender.sendMessage(getPlayerName(p)+ChatColor.GRAY+" has been healed.");
