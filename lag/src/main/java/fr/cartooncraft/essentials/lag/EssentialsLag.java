@@ -6,7 +6,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import fr.cartooncraft.essentials.commands.TPSCommand;
+import fr.cartooncraft.essentials.lag.commands.TPSCommand;
 import fr.cartooncraft.essentials.lag.listeners.LagListener;
 
 public class EssentialsLag extends JavaPlugin {

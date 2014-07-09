@@ -1,4 +1,4 @@
-package fr.cartooncraft.essentials.commands;
+package fr.cartooncraft.essentials.lag.commands;
 
 import main.java.com.webkonsept.minecraft.lagmeter.LagMeter;
 
