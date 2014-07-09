@@ -17,7 +17,7 @@ public class LagListener extends CCCommand implements main.java.com.webkonsept.m
 
 	@Override
 	public void onHighLagEvent(HighLagEvent e) {
-		Bukkit.broadcastMessage(""+ChatColor.BOLD+ChatColor.RED+"Hmmm... lag! "+e.getCurrentTPS());		
+		Bukkit.broadcastMessage(""+ChatColor.BOLD+ChatColor.RED+"Hmmm... lag! "+e.getCurrentTPS()+" TPS");		
 	}
 	
 }
