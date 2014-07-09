@@ -1,3 +1,7 @@
 name: CC-Essentials
 main: fr.cartooncraft.essentials.lag.EssentialsLag
 version: 1.0
+commands:
+    tps:
+        description: Return actual server tps.
+        usage: /tps

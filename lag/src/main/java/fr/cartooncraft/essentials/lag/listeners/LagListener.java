@@ -20,5 +20,4 @@ public class LagListener extends CCCommand implements main.java.com.webkonsept.m
 		Bukkit.broadcastMessage(""+ChatColor.BOLD+ChatColor.RED+"Hmmm... lag! "+e.getCurrentTPS());		
 	}
 	
-
 }
