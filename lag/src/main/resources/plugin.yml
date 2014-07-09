@@ -1,4 +1,4 @@
-name: CC-Essentials
+name: CC-Essentials-Lag
 main: fr.cartooncraft.essentials.lag.EssentialsLag
 version: 1.0
 commands:
