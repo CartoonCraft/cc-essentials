@@ -68,6 +68,6 @@ commands:
     random:
         description: Return a random number between two given numbers. (default 1-100)
         usage: /random | /random <x-y> | /random <x> <y>
-    roll:
+    rand:
         description: Return a random number between two given numbers. (default 1-100)
         usage: /rand | /rand <x-y> | /rand <x> <y>
