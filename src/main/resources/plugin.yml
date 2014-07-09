@@ -63,11 +63,11 @@ commands:
         description: Kick all players (include OPs, except you).
         usage: /kickallop <reason>
     roll:
-        description: Return a random number between two given numbers. (default: 1-100)
+        description: Return a random number between two given numbers. (default 1-100)
         usage: /roll | /roll <x-y> | /roll <x> <y>
     random:
-        description: Return a random number between two given numbers. (default: 1-100)
+        description: Return a random number between two given numbers. (default 1-100)
         usage: /random | /random <x-y> | /random <x> <y>
     roll:
-        description: Return a random number between two given numbers. (default: 1-100)
+        description: Return a random number between two given numbers. (default 1-100)
         usage: /rand | /rand <x-y> | /rand <x> <y>
