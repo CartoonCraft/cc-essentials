@@ -5,6 +5,7 @@
   <version>1.0.0-SNAPSHOT</version>
   <name>CC-Essentials</name>
   <description>CartoonCraft Bukkit Plugin</description>
+  <packaging>pom</packaging>
   
   <build>
     <plugins>
