@@ -13,6 +13,7 @@ import fr.cartooncraft.essentials.commands.KickallCommand;
 import fr.cartooncraft.essentials.commands.KickallOPCommand;
 import fr.cartooncraft.essentials.commands.KillCommand;
 import fr.cartooncraft.essentials.commands.ListCommand;
+import fr.cartooncraft.essentials.commands.RollCommand;
 import fr.cartooncraft.essentials.commands.SpawnCommand;
 import fr.cartooncraft.essentials.commands.TPAllCommand;
 import fr.cartooncraft.essentials.commands.TPCommand;
@@ -55,6 +56,8 @@ public class CCEssentials extends JavaPlugin {
 			new KickallCommand(sender, args);
 		else if(cmd.getName().equalsIgnoreCase("kickallop"))
 			new KickallOPCommand(sender, args);
+		else if(cmd.getName().equalsIgnoreCase("roll") || cmd.getName().equalsIgnoreCase("random") || cmd.getName().equalsIgnoreCase("rand"))
+			new RollCommand(sender, args);
 		else if(cmd.getName().equalsIgnoreCase("tell") || cmd.getName().equalsIgnoreCase("msg") || cmd.getName().equalsIgnoreCase("whisp") || cmd.getName().equalsIgnoreCase("t") || cmd.getName().equalsIgnoreCase("w") || cmd.getName().equalsIgnoreCase("pm") || cmd.getName().equalsIgnoreCase("mp"))
 			new TellCommand(sender, args);
 		else {
