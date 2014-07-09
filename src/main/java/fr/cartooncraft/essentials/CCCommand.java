@@ -52,7 +52,7 @@ public class CCCommand {
 	
 	public String getPlayerName(String playerName) {
 		
-		String name = null;
+		String name = "";
 		
 		if(playerName == "CONSOLE") {
 			name = ChatColor.RED+"CONSOLE";
