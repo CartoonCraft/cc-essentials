@@ -14,6 +14,7 @@ public class HealCommand extends CCCommand {
 			if(args.length == 0) {
 				if(isPlayer(sender)) {
 					Player p = getPlayer(sender);
+					p.setHealth(20);
 					p.setFoodLevel(20);
 					p.setExhaustion(5F);
 					sender.sendMessage(ChatColor.GRAY+"You have been healed.");
@@ -22,7 +23,7 @@ public class HealCommand extends CCCommand {
 					sender.sendMessage(senderConsole);
 				}
 			}
-			if(args.length == 1) {
+			else if(args.length == 1) {
 				if(Bukkit.getPlayer(args[0]) != null) {
 					Player p = Bukkit.getPlayer(args[0]);
 					p.setFoodLevel(20);
