@@ -22,7 +22,7 @@ public class FeedCommand extends CCCommand {
 					sender.sendMessage(senderConsole);
 				}
 			}
-			if(args.length == 1) {
+			else if(args.length == 1) {
 				if(Bukkit.getPlayer(args[0]) != null) {
 					Player p = Bukkit.getPlayer(args[0]);
 					p.setFoodLevel(20);
@@ -34,7 +34,7 @@ public class FeedCommand extends CCCommand {
 				}
 			}
 			else {
-				sender.sendMessage(ChatColor.RED+"Nope! Usage: /heal [player]");
+				sender.sendMessage(ChatColor.RED+"Nope! Usage: /fead [player]");
 			}
 		}
 		else {
