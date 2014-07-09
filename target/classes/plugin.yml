@@ -1,0 +1,73 @@
+name: CC-Essentials
+main: fr.cartooncraft.essentials.CCEssentials
+version: 0.1
+commands:
+    list:
+        description: Return players list.
+        usage: /list
+    spawn:
+        description: Teleport you or somebody to spawn. 
+        usage: /spawn [player]
+    tp:
+        description: Teleports you to another player, or teleport a player to another.
+        usage: /tp <player> | /tp <player1> <player2> | /tp <x> <y> <z> | /tp <player> <x> <y> <z>
+    teleport:
+        description: Teleports you to another player, or teleport a player to another.
+        usage: /teleport <player> | /teleport <player1> <player2> | /teleport <x> <y> <z> | /teleport <player> <x> <y> <z>
+    kill:
+        description: Kill yourself or a player
+        usage: /kill [player]
+    broadcast:
+        description: ...
+        usage: /broadcast <msg>
+    tell:
+        description: Send a message to another guy.
+        usage: /tell <player> <msg>
+    whisp:
+        description: Send a message to another guy.
+        usage: /whisp <player> <msg>
+    whisper:
+        description: Send a message to another guy.
+        usage: /whisper <player> <msg>
+    t:
+        description: Send a message to another guy.
+        usage: /t <player> <msg>
+    w:
+        description: Send a message to another guy.
+        usage: /w <player> <msg>
+    pm:
+        description: Send a message to another guy.
+        usage: /pm <player> <msg>
+    mp:
+        description: Send a message to another guy.
+        usage: /mp <player> <msg>
+    msg:
+        description: Send a message to another guy.
+        usage: /msg <player> <msg>
+    kick:
+        description: Kick a player with reason.
+        usage: /kick <player> [reason]
+    heal:
+        description: Heal a player.
+        usage: /heal [player]
+    feed:
+        description: Feed a player.
+        usage: /feed [player]
+    tpall:
+        description: Teleport all players.
+        usage: /tpallall | /tpall <player> | /tpall <x> <y> <z>
+    kickall:
+        description: Kick all players (except OPs).
+        usage: /kickall <reason>
+    kickallop:
+        description: Kick all players (include OPs, except you).
+        usage: /kickallop <reason>
+    roll:
+        description: Return a random number between two given numbers. (default: 1-100)
+        usage: /roll | /roll <x-y> | /roll <x> <y>
+    random:
+        description: Return a random number between two given numbers. (default: 1-100)
+        usage: /random | /random <x-y> | /random <x> <y>
+    roll:
+        description: Return a random number between two given numbers. (default: 1-100)
+        usage: /rand | /rand <x-y> | /rand <x> <y>
