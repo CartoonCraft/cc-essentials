@@ -14,7 +14,7 @@ public class RollCommand extends CCCommand {
 	
 	public RollCommand(CommandSender sender, String[] args) {
 		if(args.length == 0)
-			Bukkit.broadcastMessage(""+ChatColor.GRAY+getPlayerName(sender.getName()+ChatColor.GRAY+" has rolled "+ChatColor.RED+randInt(1, 100)+ChatColor.GRAY+"!"));
+			Bukkit.broadcastMessage(""+ChatColor.GRAY+getPlayerName(sender.getName())+ChatColor.GRAY+" has rolled "+ChatColor.RED+randInt(1, 100)+ChatColor.GRAY+"!");
 		else if(args.length == 1) {
 			String range = args[0];
 			Pattern p = Pattern.compile("^((0-9)+)-((0-9)+)$");
@@ -22,7 +22,7 @@ public class RollCommand extends CCCommand {
 			if(m.matches()) {
 				int x = Integer.getInteger(m.group(1));
 				int y = Integer.getInteger(m.group(2));
-				Bukkit.broadcastMessage(ChatColor.GRAY+getPlayerName(sender.getName()+ChatColor.GRAY+" has rolled "+ChatColor.RED+randInt(x, y)+ChatColor.GRAY+"!"));
+				Bukkit.broadcastMessage(ChatColor.GRAY+getPlayerName(sender.getName())+ChatColor.GRAY+" has rolled "+ChatColor.RED+randInt(x, y)+ChatColor.GRAY+"!");
 			}
 			else
 				sender.sendMessage(ChatColor.RED+args[0]+" isn't a valid range. Example: 1-10");
@@ -30,7 +30,7 @@ public class RollCommand extends CCCommand {
 		else if(args.length == 2) {
 			int x = Integer.getInteger(args[0]);
 			int y = Integer.getInteger(args[1]);
-			Bukkit.broadcastMessage(ChatColor.GRAY+getPlayerName(sender.getName()+ChatColor.GRAY+" has rolled "+ChatColor.RED+randInt(x, y)+ChatColor.GRAY+"!"));
+			Bukkit.broadcastMessage(ChatColor.GRAY+getPlayerName(sender.getName())+ChatColor.GRAY+" has rolled "+ChatColor.RED+randInt(x, y)+ChatColor.GRAY+"!");
 		}
 	}
 	
