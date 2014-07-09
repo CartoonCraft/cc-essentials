@@ -1,6 +1,6 @@
 name: CC-Essentials
 main: fr.cartooncraft.essentials.CCEssentials
-version: 0.1
+version: 1.0
 commands:
     list:
         description: Return players list.
