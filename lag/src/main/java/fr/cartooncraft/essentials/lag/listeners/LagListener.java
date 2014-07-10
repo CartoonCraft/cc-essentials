@@ -20,7 +20,7 @@ public class LagListener extends CCCommand implements main.java.com.webkonsept.m
 		if(e.getCurrentTPS() == 20) {
 			Bukkit.broadcastMessage(""+ChatColor.BOLD+ChatColor.RED+"Hmmm... lag spike!");
 		}
-		else {
+		else if(e.getCurrentTPS() <= 19){
 			Bukkit.broadcastMessage(""+ChatColor.BOLD+ChatColor.RED+"Hmmm... lag! "+e.getCurrentTPS()+" TPS actually :(");
 		}
 	}
