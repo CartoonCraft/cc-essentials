@@ -68,6 +68,18 @@ commands:
     kickallop:
         description: Kick all players (include OPs, except you).
         usage: /kickallop <reason>
+    god:
+        description: Toggle godmode for yourself or the specified player.
+        usage: /god [player]
+    godmode:
+        description: Toggle godmode for yourself or the specified player.
+        usage: /godmode [player]
+    isingod:
+        description: Tell the sender if the sender or the specified player is in godmode.
+        usage: /isingod [player]
+    isingodmode:
+        description: Tell the sender if the sender or the specified player is in godmode.
+        usage: /isingodmode [player]
     roll:
         description: Return a random number between two given numbers. (default 1-100)
         usage: /roll | /roll <x-y> | /roll <x> <y>
