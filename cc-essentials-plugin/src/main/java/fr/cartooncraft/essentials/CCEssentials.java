@@ -52,6 +52,8 @@ public class CCEssentials extends JavaPlugin {
 			ConfigManager.save(this, (String)fileName);
 			ConfigManager.configs.remove(fileName);
 		}
+		ConfigManager.save(this, "config.yml");
+		ConfigManager.configs.remove("config.yml");
 	}
 	
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
