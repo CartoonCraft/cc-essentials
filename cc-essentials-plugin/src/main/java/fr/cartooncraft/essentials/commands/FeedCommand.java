@@ -34,7 +34,7 @@ public class FeedCommand extends CCCommand {
 				}
 			}
 			else {
-				sender.sendMessage(ChatColor.RED+"Nope! Usage: /fead [player]");
+				sender.sendMessage(ChatColor.RED+"Nope! Usage: /feed [player]");
 			}
 		}
 		else {
