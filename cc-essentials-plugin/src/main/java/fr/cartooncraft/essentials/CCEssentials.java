@@ -6,7 +6,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import fr.cartooncraft.essentials.commands.BroadcastCommand;
+import fr.cartooncraft.essentials.commands.FeedAllCommand;
 import fr.cartooncraft.essentials.commands.FeedCommand;
+import fr.cartooncraft.essentials.commands.HealAllCommand;
 import fr.cartooncraft.essentials.commands.HealCommand;
 import fr.cartooncraft.essentials.commands.KickCommand;
 import fr.cartooncraft.essentials.commands.KickallCommand;
@@ -54,6 +56,10 @@ public class CCEssentials extends JavaPlugin {
 			new TPAllCommand(sender, args);
 		else if(cmd.getName().equalsIgnoreCase("kickall"))
 			new KickallCommand(sender, args);
+		else if(cmd.getName().equalsIgnoreCase("healall"))
+			new HealAllCommand(sender);
+		else if(cmd.getName().equalsIgnoreCase("feedall"))
+			new FeedAllCommand(sender);
 		else if(cmd.getName().equalsIgnoreCase("kickallop"))
 			new KickallOPCommand(sender, args);
 		else if(cmd.getName().equalsIgnoreCase("roll") || cmd.getName().equalsIgnoreCase("random") || cmd.getName().equalsIgnoreCase("rand"))
