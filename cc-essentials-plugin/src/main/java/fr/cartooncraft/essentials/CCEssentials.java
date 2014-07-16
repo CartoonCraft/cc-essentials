@@ -24,6 +24,8 @@ import fr.cartooncraft.essentials.commands.TPAllCommand;
 import fr.cartooncraft.essentials.commands.TPCommand;
 import fr.cartooncraft.essentials.commands.TellCommand;
 import fr.cartooncraft.essentials.events.ChatEvent;
+import fr.cartooncraft.essentials.events.DamageEvent;
+import fr.cartooncraft.essentials.events.LeaveEvent;
 import fr.cartooncraft.essentials.events.LoginEvent;
 
 public class CCEssentials extends JavaPlugin {
@@ -31,6 +33,8 @@ public class CCEssentials extends JavaPlugin {
 	public void onEnable() {
 		Bukkit.getPluginManager().registerEvents(new ChatEvent(), this);
 		Bukkit.getPluginManager().registerEvents(new LoginEvent(this), this);
+		Bukkit.getPluginManager().registerEvents(new LeaveEvent(this), this);
+		Bukkit.getPluginManager().registerEvents(new DamageEvent(), this);
 		getLogger().info("CC-Essentials is loaded.");
 	}
 	
