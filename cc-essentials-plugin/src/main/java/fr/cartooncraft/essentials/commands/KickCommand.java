@@ -38,7 +38,7 @@ public class KickCommand extends CCCommand {
 					}
 					Bukkit.getLogger().info(ChatColor.GOLD+sender.getName()+" has kicked "+p.getName()+".");
 					p.kickPlayer(message);
-					String messageChat = getPlayerName(p)+ChatColor.GRAY+" a été kické par ";
+					String messageChat = getPlayerName(p)+ChatColor.GRAY+" has been kicked by ";
 					if(sender instanceof Player) {
 						Player p2 = (Player)sender;
 						messageChat += getPlayerName(p2);
@@ -50,7 +50,7 @@ public class KickCommand extends CCCommand {
 						messageChat += ChatColor.GRAY+".";
 					}
 					else {
-						messageChat += ChatColor.GRAY+" pour la raison suivante : \""+ChatColor.RESET+message+ChatColor.GRAY+"\".";
+						messageChat += ChatColor.GRAY+" for the following reason: \""+ChatColor.RESET+message+ChatColor.GRAY+"\".";
 					}
 					Bukkit.broadcastMessage(messageChat);
 				}

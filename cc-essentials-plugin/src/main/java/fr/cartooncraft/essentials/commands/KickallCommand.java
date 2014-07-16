@@ -34,11 +34,11 @@ public class KickallCommand extends CCCommand {
 				if(!p.isOp())
 					p.kickPlayer(kickReason);
 			}
-			String chatMessage = ChatColor.GRAY+"Tous les joueurs (exceptés les "+ChatColor.RED+"OPs"+ChatColor.GRAY+") ont été kickés";
+			String chatMessage = ChatColor.GRAY+"All the players (excepted the "+ChatColor.RED+"OPs"+ChatColor.GRAY+") have been kicked";
 			if(noKickMessage)
 				chatMessage += ".";
 			else
-				chatMessage += " pour la raison suivante : "+'"'+ChatColor.WHITE+kickReason+ChatColor.GRAY+'"'+".";
+				chatMessage += " for the following reason: "+'"'+ChatColor.WHITE+kickReason+ChatColor.GRAY+'"'+".";
 			Bukkit.broadcastMessage(chatMessage);
 		}
 		else {
