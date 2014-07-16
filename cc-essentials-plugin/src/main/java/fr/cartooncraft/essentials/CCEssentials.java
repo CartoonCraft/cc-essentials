@@ -9,6 +9,7 @@ import org.goblom.bukkitlibs.config.ConfigManager;
 import fr.cartooncraft.essentials.commands.BroadcastCommand;
 import fr.cartooncraft.essentials.commands.FeedAllCommand;
 import fr.cartooncraft.essentials.commands.FeedCommand;
+import fr.cartooncraft.essentials.commands.GamemodeCommand;
 import fr.cartooncraft.essentials.commands.GodModeCommand;
 import fr.cartooncraft.essentials.commands.HealAllCommand;
 import fr.cartooncraft.essentials.commands.HealCommand;
@@ -77,6 +78,8 @@ public class CCEssentials extends JavaPlugin {
 			new FeedAllCommand(sender);
 		else if(cmd.getName().equalsIgnoreCase("kickallop"))
 			new KickallOPCommand(sender, args);
+		else if(cmd.getName().equalsIgnoreCase("gamemode") || cmd.getName().equalsIgnoreCase("gm"))
+			new GamemodeCommand(sender, args);
 		else if(cmd.getName().equalsIgnoreCase("isingod") || cmd.getName().equalsIgnoreCase("isingodmode"))
 			new IsInGodModeCommand(sender, args);
 		else if(cmd.getName().equalsIgnoreCase("god") || cmd.getName().equalsIgnoreCase("godmode"))
