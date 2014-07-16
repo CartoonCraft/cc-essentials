@@ -74,6 +74,12 @@ commands:
     godmode:
         description: Toggle godmode for yourself or the specified player.
         usage: /godmode [player]
+    gm:
+        description: Change the player's godmode.
+        usage: /gm | /gm <0|1|2> | /gm <name> | /gm <name> <mode>
+    gamemode:
+        description: Change the player's godmode.
+        usage: /gamemode | /gamemode <0|1|2> | /gamemode <name> | /gamemode <name> <mode>
     isingod:
         description: Tell the sender if the sender or the specified player is in godmode.
         usage: /isingod [player]
