@@ -21,6 +21,7 @@ import fr.cartooncraft.essentials.commands.KillCommand;
 import fr.cartooncraft.essentials.commands.ListCommand;
 import fr.cartooncraft.essentials.commands.RollCommand;
 import fr.cartooncraft.essentials.commands.SpawnCommand;
+import fr.cartooncraft.essentials.commands.SuicideCommand;
 import fr.cartooncraft.essentials.commands.TPAllCommand;
 import fr.cartooncraft.essentials.commands.TPCommand;
 import fr.cartooncraft.essentials.commands.TellCommand;
@@ -31,12 +32,16 @@ import fr.cartooncraft.essentials.events.LoginEvent;
 
 public class CCEssentials extends JavaPlugin {
 
+	private boolean usePermissions;
+
 	public void onEnable() {
 		Bukkit.getPluginManager().registerEvents(new ChatEvent(), this);
 		Bukkit.getPluginManager().registerEvents(new LoginEvent(this), this);
 		Bukkit.getPluginManager().registerEvents(new LeaveEvent(this), this);
 		Bukkit.getPluginManager().registerEvents(new DamageEvent(), this);
 		getLogger().info("CC-Essentials is loaded.");
+		ConfigManager.load(this, "config.yml");
+		usePermissions = ConfigManager.get("config.yml").getBoolean("usePermissions", false);
 	}
 	
 	public void onDisable() {
@@ -53,45 +58,51 @@ public class CCEssentials extends JavaPlugin {
 		
 		// Commands
 		if(cmd.getName().equalsIgnoreCase("spawn"))
-			new SpawnCommand(sender, args);
+			new SpawnCommand(this, sender, args);
 		else if(cmd.getName().equalsIgnoreCase("list"))
-			new ListCommand(sender);
+			new ListCommand(this, sender);
 		else if(cmd.getName().equalsIgnoreCase("tp") || cmd.getName().equalsIgnoreCase("teleport"))
-			new TPCommand(sender, args);
+			new TPCommand(this, sender, args);
 		else if(cmd.getName().equalsIgnoreCase("kill"))
-			new KillCommand(sender, args);
+			new KillCommand(this, sender, args);
+		else if(cmd.getName().equalsIgnoreCase("suicide"))
+			new SuicideCommand(this, sender);
 		else if(cmd.getName().equalsIgnoreCase("broadcast"))
-			new BroadcastCommand(sender, args);
+			new BroadcastCommand(this, sender, args);
 		else if(cmd.getName().equalsIgnoreCase("kick"))
-			new KickCommand(sender, args);
+			new KickCommand(this, sender, args);
 		else if(cmd.getName().equalsIgnoreCase("heal"))
-			new HealCommand(sender, args);
+			new HealCommand(this, sender, args);
 		else if(cmd.getName().equalsIgnoreCase("feed"))
-			new FeedCommand(sender, args);
+			new FeedCommand(this, sender, args);
 		else if(cmd.getName().equalsIgnoreCase("tpall"))
-			new TPAllCommand(sender, args);
+			new TPAllCommand(this, sender, args);
 		else if(cmd.getName().equalsIgnoreCase("kickall"))
-			new KickallCommand(sender, args);
+			new KickallCommand(this, sender, args);
 		else if(cmd.getName().equalsIgnoreCase("healall"))
-			new HealAllCommand(sender);
+			new HealAllCommand(this, sender);
 		else if(cmd.getName().equalsIgnoreCase("feedall"))
-			new FeedAllCommand(sender);
+			new FeedAllCommand(this, sender);
 		else if(cmd.getName().equalsIgnoreCase("kickallop"))
-			new KickallOPCommand(sender, args);
+			new KickallOPCommand(this, sender, args);
 		else if(cmd.getName().equalsIgnoreCase("gamemode") || cmd.getName().equalsIgnoreCase("gm"))
-			new GamemodeCommand(sender, args);
+			new GamemodeCommand(this, sender, args);
 		else if(cmd.getName().equalsIgnoreCase("isingod") || cmd.getName().equalsIgnoreCase("isingodmode"))
-			new IsInGodModeCommand(sender, args);
+			new IsInGodModeCommand(this, sender, args);
 		else if(cmd.getName().equalsIgnoreCase("god") || cmd.getName().equalsIgnoreCase("godmode"))
-			new GodModeCommand(sender, args);
+			new GodModeCommand(this, sender, args);
 		else if(cmd.getName().equalsIgnoreCase("roll") || cmd.getName().equalsIgnoreCase("random") || cmd.getName().equalsIgnoreCase("rand"))
-			new RollCommand(sender, args);
+			new RollCommand(this, sender, args);
 		else if(cmd.getName().equalsIgnoreCase("tell") || cmd.getName().equalsIgnoreCase("msg") || cmd.getName().equalsIgnoreCase("whisp") || cmd.getName().equalsIgnoreCase("t") || cmd.getName().equalsIgnoreCase("w") || cmd.getName().equalsIgnoreCase("pm") || cmd.getName().equalsIgnoreCase("mp"))
-			new TellCommand(sender, args);
+			new TellCommand(this, sender, args);
 		else {
 			return false;
 		}
 		return true;
+	}
+
+	public boolean isUsingPermissions() {
+		return usePermissions;
 	}
 	
 }

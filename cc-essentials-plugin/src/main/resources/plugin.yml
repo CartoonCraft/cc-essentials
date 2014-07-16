@@ -47,6 +47,9 @@ commands:
     kick:
         description: Kick a player with reason.
         usage: /kick <player> [reason]
+    suicide:
+        description: Suicide you.
+        usage: /suicide
     heal:
         description: Heal a player.
         usage: /heal [player]

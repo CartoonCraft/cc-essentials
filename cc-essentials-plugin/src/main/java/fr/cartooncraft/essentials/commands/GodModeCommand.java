@@ -6,11 +6,15 @@ import org.bukkit.entity.Player;
 import org.goblom.bukkitlibs.config.ConfigManager;
 
 import fr.cartooncraft.essentials.CCCommand;
+import fr.cartooncraft.essentials.CCEssentials;
 
 public class GodModeCommand extends CCCommand {
 	
-	public GodModeCommand(CommandSender sender, String[] args) {
-		if(sender.isOp()) {
+	CCEssentials plugin;
+	
+	public GodModeCommand(CCEssentials plugin2, CommandSender sender, String[] args) {
+		plugin = plugin2;
+		if(sender.isOp() || (plugin.isUsingPermissions() && sender.hasPermission("cc-essentials.god"))) {
 			if(args.length == 0) {
 				if(isPlayer(sender)) {
 					Player p = getPlayer(sender);

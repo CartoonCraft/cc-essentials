@@ -9,32 +9,68 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
 import fr.cartooncraft.essentials.CCCommand;
+import fr.cartooncraft.essentials.CCEssentials;
 
 public class RollCommand extends CCCommand {
 	
-	public RollCommand(CommandSender sender, String[] args) {
-		if(args.length == 0)
-			Bukkit.broadcastMessage(""+ChatColor.GRAY+getPlayerName(sender.getName())+ChatColor.GRAY+" has rolled "+ChatColor.RED+randInt(1, 100)+ChatColor.GRAY+"! ("+ChatColor.RED+1+ChatColor.GRAY+"-"+ChatColor.RED+100+ChatColor.GRAY+")");
-		else if(args.length == 1) {
-			String range = args[0];
-			Pattern p = Pattern.compile("^([0-9]+)-([0-9]+)$");
-			Matcher m = p.matcher(range);
-			if(m.matches()) {
+	CCEssentials plugin;
+	
+	public RollCommand(CCEssentials plugin2, CommandSender sender, String[] args) {
+		plugin = plugin2;
+		if(plugin.isUsingPermissions()) {
+			if(sender.hasPermission("cc-essentials.roll")) {
+				if(args.length == 0)
+					Bukkit.broadcastMessage(""+ChatColor.GRAY+getPlayerName(sender.getName())+ChatColor.GRAY+" has rolled "+ChatColor.RED+randInt(1, 100)+ChatColor.GRAY+"! ("+ChatColor.RED+1+ChatColor.GRAY+"-"+ChatColor.RED+100+ChatColor.GRAY+")");
+				else if(args.length == 1) {
+					String range = args[0];
+					Pattern p = Pattern.compile("^([0-9]+)-([0-9]+)$");
+					Matcher m = p.matcher(range);
+					if(m.matches()) {
+						int x, y = 0;
+						x = Integer.parseInt(m.group(1));
+						y = Integer.parseInt(m.group(2));
+						Bukkit.broadcastMessage(ChatColor.GRAY+getPlayerName(sender.getName())+ChatColor.GRAY+" has rolled "+ChatColor.RED+randInt(x, y)+ChatColor.GRAY+"! ("+ChatColor.RED+x+ChatColor.GRAY+"-"+ChatColor.RED+y+ChatColor.GRAY+")");
+					}
+					else
+						sender.sendMessage(ChatColor.RED+args[0]+" isn't a valid range. Example: 1-10");
+				}
+				else if(args.length == 2) {
+					String xs = args[0];
+					String ys = args[1];
+					int x, y = 0;
+					x = Integer.parseInt(xs);
+					y = Integer.parseInt(ys);
+					Bukkit.broadcastMessage(ChatColor.GRAY+getPlayerName(sender.getName())+ChatColor.GRAY+" has rolled "+ChatColor.RED+randInt(x, y)+ChatColor.GRAY+"! ("+ChatColor.RED+x+ChatColor.GRAY+"-"+ChatColor.RED+y+ChatColor.GRAY+")");
+				}
+			}
+			else {
+				sender.sendMessage(noPermission);
+			}
+		}
+		else {
+			if(args.length == 0)
+				Bukkit.broadcastMessage(""+ChatColor.GRAY+getPlayerName(sender.getName())+ChatColor.GRAY+" has rolled "+ChatColor.RED+randInt(1, 100)+ChatColor.GRAY+"! ("+ChatColor.RED+1+ChatColor.GRAY+"-"+ChatColor.RED+100+ChatColor.GRAY+")");
+			else if(args.length == 1) {
+				String range = args[0];
+				Pattern p = Pattern.compile("^([0-9]+)-([0-9]+)$");
+				Matcher m = p.matcher(range);
+				if(m.matches()) {
+					int x, y = 0;
+					x = Integer.parseInt(m.group(1));
+					y = Integer.parseInt(m.group(2));
+					Bukkit.broadcastMessage(ChatColor.GRAY+getPlayerName(sender.getName())+ChatColor.GRAY+" has rolled "+ChatColor.RED+randInt(x, y)+ChatColor.GRAY+"! ("+ChatColor.RED+x+ChatColor.GRAY+"-"+ChatColor.RED+y+ChatColor.GRAY+")");
+				}
+				else
+					sender.sendMessage(ChatColor.RED+args[0]+" isn't a valid range. Example: 1-10");
+			}
+			else if(args.length == 2) {
+				String xs = args[0];
+				String ys = args[1];
 				int x, y = 0;
-				x = Integer.parseInt(m.group(1));
-				y = Integer.parseInt(m.group(2));
+				x = Integer.parseInt(xs);
+				y = Integer.parseInt(ys);
 				Bukkit.broadcastMessage(ChatColor.GRAY+getPlayerName(sender.getName())+ChatColor.GRAY+" has rolled "+ChatColor.RED+randInt(x, y)+ChatColor.GRAY+"! ("+ChatColor.RED+x+ChatColor.GRAY+"-"+ChatColor.RED+y+ChatColor.GRAY+")");
 			}
-			else
-				sender.sendMessage(ChatColor.RED+args[0]+" isn't a valid range. Example: 1-10");
-		}
-		else if(args.length == 2) {
-			String xs = args[0];
-			String ys = args[1];
-			int x, y = 0;
-			x = Integer.parseInt(xs);
-			y = Integer.parseInt(ys);
-			Bukkit.broadcastMessage(ChatColor.GRAY+getPlayerName(sender.getName())+ChatColor.GRAY+" has rolled "+ChatColor.RED+randInt(x, y)+ChatColor.GRAY+"! ("+ChatColor.RED+x+ChatColor.GRAY+"-"+ChatColor.RED+y+ChatColor.GRAY+")");
 		}
 	}
 	

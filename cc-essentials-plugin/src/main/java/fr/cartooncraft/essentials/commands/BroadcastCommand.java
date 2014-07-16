@@ -5,11 +5,16 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
 import fr.cartooncraft.essentials.CCCommand;
+import fr.cartooncraft.essentials.CCEssentials;
 
 public class BroadcastCommand extends CCCommand {
 	
-	public BroadcastCommand(CommandSender sender, String[] args) {
-		if(sender.isOp()) {
+	CCEssentials plugin;
+	
+	
+	public BroadcastCommand(CCEssentials p, CommandSender sender, String[] args) {
+		plugin = p;
+		if(sender.isOp() || (sender.hasPermission("cc-essentials.broadcast") && plugin.isUsingPermissions())) {
 			String message = ""+ChatColor.RED+ChatColor.BOLD;
 			for(String arg : args) {
 				message += arg+" ";

@@ -7,12 +7,16 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import fr.cartooncraft.essentials.CCCommand;
+import fr.cartooncraft.essentials.CCEssentials;
 
 public class SpawnCommand extends CCCommand {
 	
-	public SpawnCommand(CommandSender sender, String[] args) {
+	CCEssentials plugin;
+	
+	public SpawnCommand(CCEssentials plugin2, CommandSender sender, String[] args) {
+		plugin = plugin2;
 		Location spawn = new Location(Bukkit.getWorld("world"), -685.5, 64, 327.5, 90, 0);
-		if(sender.isOp()) {
+		if(sender.isOp() || (plugin.isUsingPermissions() && sender.hasPermission("cc-essentials.spawn"))) {
 			if(args.length == 0) {
 				if(isPlayer(sender)) {
 					Player p = getPlayer(sender);

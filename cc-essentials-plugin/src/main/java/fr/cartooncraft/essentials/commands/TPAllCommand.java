@@ -8,11 +8,14 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import fr.cartooncraft.essentials.CCCommand;
+import fr.cartooncraft.essentials.CCEssentials;
 
 public class TPAllCommand extends CCCommand {
 
-	public TPAllCommand(CommandSender sender, String[] args) {
-		if(sender.isOp()) {
+	CCEssentials plugin;
+	public TPAllCommand(CCEssentials plugin2, CommandSender sender, String[] args) {
+		plugin = plugin2;
+		if(sender.isOp() || (plugin.isUsingPermissions() && sender.hasPermission("cc-essentials.tpall"))) {
 			if(args.length == 0) {
 				if(isPlayer(sender)) {
 					Player p = getPlayer(sender);

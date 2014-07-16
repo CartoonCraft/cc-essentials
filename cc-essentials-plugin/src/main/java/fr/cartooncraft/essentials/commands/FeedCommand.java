@@ -6,11 +6,15 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import fr.cartooncraft.essentials.CCCommand;
+import fr.cartooncraft.essentials.CCEssentials;
 
 public class FeedCommand extends CCCommand {
 
-	public FeedCommand(CommandSender sender, String[] args) {
-		if(sender.isOp()) {
+	CCEssentials plugin;
+	
+	public FeedCommand(CCEssentials plugin2, CommandSender sender, String[] args) {
+		plugin = plugin2;
+		if(sender.isOp() || (plugin.isUsingPermissions() && sender.hasPermission("cc-essentials.feed"))) {
 			if(args.length == 0) {
 				if(isPlayer(sender)) {
 					Player p = getPlayer(sender);

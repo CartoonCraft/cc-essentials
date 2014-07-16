@@ -6,15 +6,19 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import fr.cartooncraft.essentials.CCCommand;
+import fr.cartooncraft.essentials.CCEssentials;
 
 public class KickCommand extends CCCommand {
 	
-	public KickCommand(CommandSender sender, String[] args) {
+	CCEssentials plugin;
+	
+	public KickCommand(CCEssentials plugin2, CommandSender sender, String[] args) {
+		plugin = plugin2;
 		if(args.length < 1) {
 			sender.sendMessage(ChatColor.RED+"Nope! Usage: /kick <player> <reason>");
 		}
 		else {
-			if(sender.isOp()) {
+			if(sender.isOp() || (plugin.isUsingPermissions() && (sender.hasPermission("cc-essentials.kickall") || sender.hasPermission("cc-essentials.kick")))) {
 				Player p = Bukkit.getPlayer(args[0]);
 				if(p == null) {
 					sender.sendMessage(getPlayerNotFoundSentence(args[0]));

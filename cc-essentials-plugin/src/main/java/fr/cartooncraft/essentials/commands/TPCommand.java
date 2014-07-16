@@ -7,14 +7,17 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import fr.cartooncraft.essentials.CCCommand;
+import fr.cartooncraft.essentials.CCEssentials;
 
 public class TPCommand extends CCCommand {
 
-	public TPCommand(CommandSender sender, String[] args) {
+	CCEssentials plugin;
+	public TPCommand(CCEssentials plugin2, CommandSender sender, String[] args) {
+		plugin = plugin2;
 		if(args.length == 1) {
 			if(isPlayer(sender)) {
 				Player p = getPlayer(sender);
-				if(p.isOp()) {
+				if(sender.isOp() || (plugin.isUsingPermissions() && (sender.hasPermission("cc-essentials.tpto") || sender.hasPermission("cc-essentials.tp")))) {
 					if(Bukkit.getPlayer(args[0]) == null) {
 						sender.sendMessage(getPlayerNotFoundSentence(args[0]));
 					}
@@ -33,7 +36,7 @@ public class TPCommand extends CCCommand {
 			}
 		}
 		else if(args.length == 2) {
-			if(sender.isOp()) {
+			if(sender.isOp() || (plugin.isUsingPermissions() && sender.hasPermission("cc-essentials.tp"))) {
 				Player p1 = null;
 				Player p2 = null;
 				if(Bukkit.getPlayer(args[0]) == null) {
@@ -56,7 +59,7 @@ public class TPCommand extends CCCommand {
 		else if(args.length == 3) {
 			if(isPlayer(sender)) {
 				Player p = getPlayer(sender);
-				if(p.isOp()) {
+				if(sender.isOp() || (plugin.isUsingPermissions() && (sender.hasPermission("cc-essentials.tp.loc") || sender.hasPermission("cc-essentials.tp")))) {
 					float x = Float.parseFloat(args[0]);
 					float y = Float.parseFloat(args[1]);
 					float z = Float.parseFloat(args[2]);
@@ -75,9 +78,9 @@ public class TPCommand extends CCCommand {
 			}
 		}
 		else if(args.length == 4) {
-			if(Bukkit.getPlayer(args[0]) != null) {
-				Player p = getPlayer(sender);
-				if(p.isOp()) {
+			if(isPlayer(args[0])) {
+				Player p = getPlayer(args[0]);
+				if(sender.isOp() || (plugin.isUsingPermissions() && (sender.hasPermission("cc-essentials.tp") || sender.hasPermission("cc-essentials.tp.loc")))) {
 					float x = Float.parseFloat(args[1]);
 					float y = Float.parseFloat(args[2]);
 					float z = Float.parseFloat(args[3]);

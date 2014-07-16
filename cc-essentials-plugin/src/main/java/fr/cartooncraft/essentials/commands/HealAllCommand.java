@@ -6,11 +6,15 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import fr.cartooncraft.essentials.CCCommand;
+import fr.cartooncraft.essentials.CCEssentials;
 
 public class HealAllCommand extends CCCommand {
+	
+	CCEssentials plugin;
 
-	public HealAllCommand(CommandSender sender) {
-		if(sender.isOp()) {
+	public HealAllCommand(CCEssentials plugin2, CommandSender sender) {
+		plugin = plugin2;		
+		if(sender.isOp() || (plugin.isUsingPermissions() && sender.hasPermission("cc-essentials.healall"))) {
 			for(Player p : Bukkit.getOnlinePlayers()) {
 				p.setHealth(20);
 				p.setFoodLevel(20);
