@@ -3,7 +3,6 @@ package fr.cartooncraft.essentials;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.goblom.bukkitlibs.config.ConfigManager;
 
@@ -39,8 +38,9 @@ public class CCEssentials extends JavaPlugin {
 		getLogger().info("CC-Essentials is unloaded.");
 		
 		// Save players configs
-		for(Player p : Bukkit.getOnlinePlayers()) {
-			ConfigManager.save(this, p.getName()+".yml");
+		for(Object fileName : ConfigManager.configs.keySet().toArray()) {
+			ConfigManager.save(this, (String)fileName);
+			ConfigManager.configs.remove(fileName);
 		}
 	}
 	
