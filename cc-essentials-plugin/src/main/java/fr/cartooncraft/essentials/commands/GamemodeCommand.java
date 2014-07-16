@@ -74,6 +74,9 @@ public class GamemodeCommand extends CCCommand {
 					sender.sendMessage(getPlayerNotFoundSentence(args[0]));
 				}
 			}
+			else {
+				sender.sendMessage(ChatColor.RED+"Usage: /gamemode | /gamemode <0|1|2> | /gamemode <name> | /gamemode <name> <mode>");
+			}
 		}
 		else {
 			sender.sendMessage(noPermission);
