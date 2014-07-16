@@ -37,12 +37,12 @@ public class GodModeCommand extends CCCommand {
 					if(godMode) {
 						ConfigManager.get(p.getName()+".yml").set("godmode", false);
 						godMode = false;
-						p.sendMessage(ChatColor.GRAY+getPlayerName(p)+ChatColor.GRAY+"is not in godmode anymore.");
+						p.sendMessage(ChatColor.GRAY+getPlayerName(p)+ChatColor.GRAY+" is not in godmode anymore.");
 					}
 					else {
 						ConfigManager.get(p.getName()+".yml").set("godmode", true);
 						godMode = true;
-						p.sendMessage(ChatColor.GRAY+getPlayerName(p)+ChatColor.GRAY+"is now in godmode.");
+						p.sendMessage(ChatColor.GRAY+getPlayerName(p)+ChatColor.GRAY+" is now in godmode.");
 					}
 				}
 				else {
