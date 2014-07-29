@@ -25,10 +25,11 @@ import fr.cartooncraft.essentials.commands.SuicideCommand;
 import fr.cartooncraft.essentials.commands.TPAllCommand;
 import fr.cartooncraft.essentials.commands.TPCommand;
 import fr.cartooncraft.essentials.commands.TellCommand;
-import fr.cartooncraft.essentials.events.ChatEvent;
-import fr.cartooncraft.essentials.events.DamageEvent;
-import fr.cartooncraft.essentials.events.LeaveEvent;
-import fr.cartooncraft.essentials.events.LoginEvent;
+import fr.cartooncraft.essentials.events.listeners.ChatEvent;
+import fr.cartooncraft.essentials.events.listeners.DamageEvent;
+import fr.cartooncraft.essentials.events.listeners.InteractEvent;
+import fr.cartooncraft.essentials.events.listeners.LeaveEvent;
+import fr.cartooncraft.essentials.events.listeners.LoginEvent;
 
 public class CCEssentials extends JavaPlugin {
 
@@ -39,6 +40,7 @@ public class CCEssentials extends JavaPlugin {
 		Bukkit.getPluginManager().registerEvents(new LoginEvent(this), this);
 		Bukkit.getPluginManager().registerEvents(new LeaveEvent(this), this);
 		Bukkit.getPluginManager().registerEvents(new DamageEvent(), this);
+		Bukkit.getPluginManager().registerEvents(new InteractEvent(null), this);
 		getLogger().info("CC-Essentials is loaded.");
 		ConfigManager.load(this, "config.yml");
 		usePermissions = ConfigManager.get("config.yml").getBoolean("usePermissions", false);

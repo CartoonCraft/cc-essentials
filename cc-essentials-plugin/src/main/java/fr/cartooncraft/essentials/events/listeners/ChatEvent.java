@@ -1,4 +1,4 @@
-package fr.cartooncraft.essentials.events;
+package fr.cartooncraft.essentials.events.listeners;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
