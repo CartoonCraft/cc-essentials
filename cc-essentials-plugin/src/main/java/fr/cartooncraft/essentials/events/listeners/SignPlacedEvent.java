@@ -49,7 +49,7 @@ public class SignPlacedEvent extends CCCommand implements Listener {
 		}
 		
 
-		if(e.getLine(0).equalsIgnoreCase("[Void]")) {
+		else if(e.getLine(0).equalsIgnoreCase("[Void]")) {
 			if(p.isOp() || (plugin.isUsingPermissions() && p.hasPermission("cc-essentials.signs.void.place"))) {				
 				// Creating the sign
 				e.setLine(0, ChatColor.BLUE+"[Void]");
@@ -62,11 +62,24 @@ public class SignPlacedEvent extends CCCommand implements Listener {
 		}
 
 		
-		if(e.getLine(0).equalsIgnoreCase("[Heal]")) {
+		else if(e.getLine(0).equalsIgnoreCase("[Heal]")) {
 			if(p.isOp() || (plugin.isUsingPermissions() && p.hasPermission("cc-essentials.signs.heal.place"))) {				
 				// Creating the sign
 				e.setLine(0, ChatColor.BLUE+"[Heal]");
 				p.sendMessage(ChatColor.BLUE+"[Heal]"+ChatColor.GRAY+" sign successfully created.");
+			}
+			else {
+				p.sendMessage(noPermission);
+				e.setCancelled(true);
+			}
+		}
+
+		
+		else if(e.getLine(0).equalsIgnoreCase("[Feed]")) {
+			if(p.isOp() || (plugin.isUsingPermissions() && p.hasPermission("cc-essentials.signs.feed.place"))) {				
+				// Creating the sign
+				e.setLine(0, ChatColor.BLUE+"[Feed]");
+				p.sendMessage(ChatColor.BLUE+"[Feed]"+ChatColor.GRAY+" sign successfully created.");
 			}
 			else {
 				p.sendMessage(noPermission);

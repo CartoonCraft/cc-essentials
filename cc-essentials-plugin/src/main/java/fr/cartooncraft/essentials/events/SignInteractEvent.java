@@ -58,6 +58,17 @@ public class SignInteractEvent extends PlayerInteractEvent {
 				getPlayer().sendMessage(ChatColor.RED+"Sorry, you're not authorized to do this.");
 			}
 		}
+		else if(getSign().getLine(0).equals(ChatColor.BLUE+"[Feed]")) {
+			if(getPlayer().isOp() || (plugin.isUsingPermissions() && getPlayer().hasPermission("cc-essentials.signs.feed.use"))) {
+				Player player = getPlayer();
+				player.setFoodLevel(20);
+				player.setExhaustion(5F);
+				player.sendMessage(ChatColor.GRAY+"You have been fed.");
+			}
+			else {
+				getPlayer().sendMessage(ChatColor.RED+"Sorry, you're not authorized to do this.");
+			}
+		}
 	}
 	
 	public Sign getSign() {
