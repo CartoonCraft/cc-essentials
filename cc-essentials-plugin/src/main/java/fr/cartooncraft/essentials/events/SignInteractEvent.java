@@ -26,8 +26,14 @@ public class SignInteractEvent extends PlayerInteractEvent {
 			if(getPlayer().isOp() || (plugin.isUsingPermissions() && getPlayer().hasPermission("cc-essentials.signs.free.use"))) {
 				Inventory inv;
 				inv = Bukkit.getServer().createInventory(getPlayer(), 27, "Free items!");
-				inv.all(new ItemStack(Material.valueOf(getSign().getLine(1)), 64, Short.parseShort(getSign().getLine(2))));
+				//inv.all(new ItemStack(Material.valueOf(getSign().getLine(1)), 64, Short.parseShort(getSign().getLine(2))));
+				for(int i = 0; i < 27; i++) {
+					inv.addItem(new ItemStack(Material.valueOf(getSign().getLine(1)), 64, Short.parseShort(getSign().getLine(2))));
+				}
 				getPlayer().openInventory(inv);
+			}
+			else {
+				getPlayer().sendMessage(ChatColor.RED+"Sorry, you're not authorized to do this.");
 			}
 		}
 	}

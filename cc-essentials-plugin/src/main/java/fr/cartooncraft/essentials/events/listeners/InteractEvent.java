@@ -20,7 +20,7 @@ public class InteractEvent extends CCCommand implements Listener {
 	
 	@EventHandler
 	public void onInteract(PlayerInteractEvent e) {
-		if(e.getAction() == Action.RIGHT_CLICK_BLOCK || e.getAction() == Action.LEFT_CLICK_BLOCK) {
+		if(e.getAction() == Action.RIGHT_CLICK_BLOCK) {
 			if(e.getClickedBlock().getState().getType().equals(Material.WALL_SIGN) || e.getClickedBlock().getState().getType().equals(Material.SIGN_POST)) {
 				new SignInteractEvent(e.getPlayer(), e.getAction(), e.getItem(), e.getClickedBlock(), e.getBlockFace(), plugin);
 			}
