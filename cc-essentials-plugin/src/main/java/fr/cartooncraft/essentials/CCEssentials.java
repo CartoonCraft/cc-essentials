@@ -30,6 +30,7 @@ import fr.cartooncraft.essentials.events.listeners.DamageEvent;
 import fr.cartooncraft.essentials.events.listeners.InteractEvent;
 import fr.cartooncraft.essentials.events.listeners.LeaveEvent;
 import fr.cartooncraft.essentials.events.listeners.LoginEvent;
+import fr.cartooncraft.essentials.events.listeners.SignPlacedEvent;
 
 public class CCEssentials extends JavaPlugin {
 
@@ -40,7 +41,8 @@ public class CCEssentials extends JavaPlugin {
 		Bukkit.getPluginManager().registerEvents(new LoginEvent(this), this);
 		Bukkit.getPluginManager().registerEvents(new LeaveEvent(this), this);
 		Bukkit.getPluginManager().registerEvents(new DamageEvent(), this);
-		Bukkit.getPluginManager().registerEvents(new InteractEvent(null), this);
+		Bukkit.getPluginManager().registerEvents(new InteractEvent(this), this);
+		Bukkit.getPluginManager().registerEvents(new SignPlacedEvent(this), this);
 		getLogger().info("CC-Essentials is loaded.");
 		ConfigManager.load(this, "config.yml");
 		usePermissions = ConfigManager.get("config.yml").getBoolean("usePermissions", false);
