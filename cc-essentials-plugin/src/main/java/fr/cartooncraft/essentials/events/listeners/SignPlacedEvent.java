@@ -1,5 +1,6 @@
 package fr.cartooncraft.essentials.events.listeners;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -21,7 +22,9 @@ public class SignPlacedEvent extends CCCommand implements Listener {
 	@EventHandler
 	public void onSignPlaced(SignChangeEvent e) {
 		Player p = e.getPlayer();
+		Bukkit.getLogger().info("sign placed!");
 		if(e.getLine(0) == "[Free]") {
+			Bukkit.getLogger().info("[Free] sign placed!");
 			if(p.isOp() || (plugin.isUsingPermissions() && p.hasPermission("cc-essentials.signs.free.place"))) {
 				if(Material.matchMaterial(e.getLine(1)) != null) {
 					// Setting metadata if not set
@@ -35,6 +38,7 @@ public class SignPlacedEvent extends CCCommand implements Listener {
 					// Creating the sign
 					e.setLine(0, ChatColor.BLUE+"[Free]");
 					e.setLine(1, Material.getMaterial(e.getLine(1)).toString().toUpperCase());
+					p.sendMessage("[Free] sign successfully created.");
 				}
 				else {
 					p.sendMessage("No matching item/block found.");
