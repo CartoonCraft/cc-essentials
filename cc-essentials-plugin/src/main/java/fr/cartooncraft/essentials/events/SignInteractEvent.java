@@ -36,6 +36,16 @@ public class SignInteractEvent extends PlayerInteractEvent {
 				getPlayer().sendMessage(ChatColor.RED+"Sorry, you're not authorized to do this.");
 			}
 		}
+		else if(getSign().getLine(0).equals(ChatColor.BLUE+"[Void]")) {
+			if(getPlayer().isOp() || (plugin.isUsingPermissions() && getPlayer().hasPermission("cc-essentials.signs.void.use"))) {
+				Inventory inv;
+				inv = Bukkit.getServer().createInventory(getPlayer(), 27, "Void!");
+				getPlayer().openInventory(inv);
+			}
+			else {
+				getPlayer().sendMessage(ChatColor.RED+"Sorry, you're not authorized to do this.");
+			}
+		}
 	}
 	
 	public Sign getSign() {
