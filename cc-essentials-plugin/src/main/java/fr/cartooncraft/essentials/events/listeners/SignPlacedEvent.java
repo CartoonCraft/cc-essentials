@@ -86,5 +86,18 @@ public class SignPlacedEvent extends CCCommand implements Listener {
 				e.setCancelled(true);
 			}
 		}
+
+		
+		else if(e.getLine(0).equalsIgnoreCase("[Spawn]")) {
+			if(p.isOp() || (plugin.isUsingPermissions() && p.hasPermission("cc-essentials.signs.spawn.place"))) {				
+				// Creating the sign
+				e.setLine(0, ChatColor.BLUE+"[Spawn]");
+				p.sendMessage(ChatColor.BLUE+"[Spawn]"+ChatColor.GRAY+" sign successfully created.");
+			}
+			else {
+				p.sendMessage(noPermission);
+				e.setCancelled(true);
+			}
+		}
 	}
 }

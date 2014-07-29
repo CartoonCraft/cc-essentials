@@ -69,6 +69,16 @@ public class SignInteractEvent extends PlayerInteractEvent {
 				getPlayer().sendMessage(ChatColor.RED+"Sorry, you're not authorized to do this.");
 			}
 		}
+		else if(getSign().getLine(0).equals(ChatColor.BLUE+"[Spawn]")) {
+			if(getPlayer().isOp() || (plugin.isUsingPermissions() && getPlayer().hasPermission("cc-essentials.signs.spawn.use"))) {
+				Player player = getPlayer();
+				player.teleport(Bukkit.getWorlds().get(0).getSpawnLocation());
+				player.sendMessage(ChatColor.GRAY+"You have been teleported to the spawn!");
+			}
+			else {
+				getPlayer().sendMessage(ChatColor.RED+"Sorry, you're not authorized to do this.");
+			}
+		}
 	}
 	
 	public Sign getSign() {
