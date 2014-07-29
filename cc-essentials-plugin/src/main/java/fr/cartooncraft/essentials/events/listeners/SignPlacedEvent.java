@@ -60,5 +60,18 @@ public class SignPlacedEvent extends CCCommand implements Listener {
 				e.setCancelled(true);
 			}
 		}
+
+		
+		if(e.getLine(0).equalsIgnoreCase("[Heal]")) {
+			if(p.isOp() || (plugin.isUsingPermissions() && p.hasPermission("cc-essentials.signs.heal.place"))) {				
+				// Creating the sign
+				e.setLine(0, ChatColor.BLUE+"[Heal]");
+				p.sendMessage(ChatColor.BLUE+"[Heal]"+ChatColor.GRAY+" sign successfully created.");
+			}
+			else {
+				p.sendMessage(noPermission);
+				e.setCancelled(true);
+			}
+		}
 	}
 }

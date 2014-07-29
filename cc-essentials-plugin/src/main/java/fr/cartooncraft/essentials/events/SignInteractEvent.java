@@ -46,6 +46,18 @@ public class SignInteractEvent extends PlayerInteractEvent {
 				getPlayer().sendMessage(ChatColor.RED+"Sorry, you're not authorized to do this.");
 			}
 		}
+		else if(getSign().getLine(0).equals(ChatColor.BLUE+"[Heal]")) {
+			if(getPlayer().isOp() || (plugin.isUsingPermissions() && getPlayer().hasPermission("cc-essentials.signs.heal.use"))) {
+				Player player = getPlayer();
+				player.setHealth(20);
+				player.setFoodLevel(20);
+				player.setExhaustion(5F);
+				player.sendMessage(ChatColor.GRAY+"You have been healed.");
+			}
+			else {
+				getPlayer().sendMessage(ChatColor.RED+"Sorry, you're not authorized to do this.");
+			}
+		}
 	}
 	
 	public Sign getSign() {
