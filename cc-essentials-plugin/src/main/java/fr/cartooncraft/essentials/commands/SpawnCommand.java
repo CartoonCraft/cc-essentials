@@ -2,7 +2,6 @@ package fr.cartooncraft.essentials.commands;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -15,12 +14,11 @@ public class SpawnCommand extends CCCommand {
 	
 	public SpawnCommand(CCEssentials plugin2, CommandSender sender, String[] args) {
 		plugin = plugin2;
-		Location spawn = new Location(Bukkit.getWorld("world"), -685.5, 64, 327.5, 90, 0);
 		if(sender.isOp() || (plugin.isUsingPermissions() && sender.hasPermission("cc-essentials.spawn"))) {
 			if(args.length == 0) {
 				if(isPlayer(sender)) {
 					Player p = getPlayer(sender);
-					p.teleport(spawn);
+					p.teleport(Bukkit.getWorlds().get(0).getSpawnLocation());
 					p.sendMessage(ChatColor.GRAY+"You have been teleported to the spawn!");
 				}
 				else {
@@ -30,7 +28,7 @@ public class SpawnCommand extends CCCommand {
 			else if(args.length == 1) {
 				if(getPlayer(args[0]) != null) {
 					Player p = getPlayer(args[0]);
-					p.teleport(spawn);
+					p.teleport(Bukkit.getWorlds().get(0).getSpawnLocation());
 					sender.sendMessage(""+ChatColor.GRAY+getPlayerName(p)+ChatColor.GRAY+" has been teleported to the spawn!");
 				}
 				else {
