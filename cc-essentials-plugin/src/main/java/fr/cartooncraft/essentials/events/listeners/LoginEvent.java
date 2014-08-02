@@ -20,14 +20,13 @@ public class LoginEvent implements Listener {
 	
 	@EventHandler
 	public void onLogin(PlayerLoginEvent e) {
-		File file = new File("plugins/"+e.getPlayer().getName()+".yml");
-		if(!file.isFile())
-			try {
-				file.createNewFile();
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+		plugin.getLogger().info("Creating file "+plugin.getServer().getWorldContainer().getAbsolutePath()+"/plugins/CC-Essentials/"+e.getPlayer().getName()+".yml...");
+		File file = new File(plugin.getServer().getWorldContainer().getAbsolutePath()+"/plugins/CC-Essentials/"+e.getPlayer().getName()+".yml");
+		try {
+			file.createNewFile();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 		ConfigManager.load(plugin, e.getPlayer().getName()+".yml");
 	}
 }
