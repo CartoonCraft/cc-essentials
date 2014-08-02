@@ -17,6 +17,13 @@ public class LoginEvent implements Listener {
 	
 	@EventHandler
 	public void onLogin(PlayerLoginEvent e) {
-		ConfigManager.load(plugin, e.getPlayer().getName()+".yml");
+		try {
+			ConfigManager.load(plugin, e.getPlayer().getName()+".yml");
+		}
+		catch(IllegalArgumentException ex) {
+			ConfigManager.save(plugin, e.getPlayer().getName()+".yml");
+			ConfigManager.configs.remove(e.getPlayer().getName()+".yml");
+			ConfigManager.load(plugin, e.getPlayer().getName()+".yml");
+		}
 	}
 }
