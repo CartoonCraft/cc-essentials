@@ -36,7 +36,7 @@ public class GodModeCommand extends CCCommand {
 			}
 			else if(args.length == 1) {
 				if(isPlayer(args[0])) {
-					Player p = getPlayer(sender);
+					Player p = getPlayer(args[0]);
 					boolean godMode = ConfigManager.get(p.getName()+".yml").getBoolean("godmode", false);
 					if(godMode) {
 						ConfigManager.get(p.getName()+".yml").set("godmode", false);

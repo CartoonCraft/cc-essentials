@@ -45,6 +45,9 @@ public class CCEssentials extends JavaPlugin {
 		Bukkit.getPluginManager().registerEvents(new InteractEvent(this), this);
 		Bukkit.getPluginManager().registerEvents(new SignPlacedEvent(this), this);
 		getLogger().info("CC-Essentials is loaded.");
+		
+		// Config file
+		
 		ConfigManager.load(this, "config.yml");
 		setUsingPermissions(ConfigManager.get("config.yml").getBoolean("usePermissions", false));
 		setEnableChat(ConfigManager.get("config.yml").getBoolean("enableChat", true));
