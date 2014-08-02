@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.goblom.bukkitlibs.config.ConfigManager;
 
 import fr.cartooncraft.essentials.CCCommand;
 import fr.cartooncraft.essentials.CCEssentials;
@@ -100,6 +101,9 @@ public class TellCommand extends CCCommand {
 				}
 				p2.sendMessage(m);
 				sender.sendMessage(m);
+				if(isPlayer(sender)) {
+					ConfigManager.get(p2.getName()+".yml").set("lastCorrespondent", sender.getName());
+				}
 			}
 		}
 	}
