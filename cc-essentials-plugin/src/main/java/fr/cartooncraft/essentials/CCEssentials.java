@@ -35,9 +35,10 @@ import fr.cartooncraft.essentials.events.listeners.SignPlacedEvent;
 public class CCEssentials extends JavaPlugin {
 
 	private boolean usePermissions;
+	private boolean enableChat;
 
 	public void onEnable() {
-		Bukkit.getPluginManager().registerEvents(new ChatEvent(), this);
+		Bukkit.getPluginManager().registerEvents(new ChatEvent(this), this);
 		Bukkit.getPluginManager().registerEvents(new LoginEvent(this), this);
 		Bukkit.getPluginManager().registerEvents(new LeaveEvent(this), this);
 		Bukkit.getPluginManager().registerEvents(new DamageEvent(), this);
@@ -45,7 +46,8 @@ public class CCEssentials extends JavaPlugin {
 		Bukkit.getPluginManager().registerEvents(new SignPlacedEvent(this), this);
 		getLogger().info("CC-Essentials is loaded.");
 		ConfigManager.load(this, "config.yml");
-		usePermissions = ConfigManager.get("config.yml").getBoolean("usePermissions", false);
+		setUsingPermissions(ConfigManager.get("config.yml").getBoolean("usePermissions", false));
+		setEnableChat(ConfigManager.get("config.yml").getBoolean("enableChat", true));
 	}
 	
 	public void onDisable() {
@@ -109,6 +111,18 @@ public class CCEssentials extends JavaPlugin {
 
 	public boolean isUsingPermissions() {
 		return usePermissions;
+	}
+
+	public boolean isChatEnabled() {
+		return enableChat;
+	}
+
+	public void setUsingPermissions(boolean usingPermissions) {
+		this.usePermissions = usingPermissions;
+	}
+
+	public void setEnableChat(boolean enableChat) {
+		this.enableChat = enableChat;
 	}
 	
 }
