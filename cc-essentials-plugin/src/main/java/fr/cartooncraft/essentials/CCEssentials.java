@@ -18,7 +18,9 @@ import fr.cartooncraft.essentials.commands.KickCommand;
 import fr.cartooncraft.essentials.commands.KickallCommand;
 import fr.cartooncraft.essentials.commands.KickallOPCommand;
 import fr.cartooncraft.essentials.commands.KillCommand;
+import fr.cartooncraft.essentials.commands.LifeCommand;
 import fr.cartooncraft.essentials.commands.ListCommand;
+import fr.cartooncraft.essentials.commands.ReplyCommand;
 import fr.cartooncraft.essentials.commands.RollCommand;
 import fr.cartooncraft.essentials.commands.SpawnCommand;
 import fr.cartooncraft.essentials.commands.SuicideCommand;
@@ -106,9 +108,12 @@ public class CCEssentials extends JavaPlugin {
 			new RollCommand(this, sender, args);
 		else if(cmd.getName().equalsIgnoreCase("tell") || cmd.getName().equalsIgnoreCase("msg") || cmd.getName().equalsIgnoreCase("whisp") || cmd.getName().equalsIgnoreCase("t") || cmd.getName().equalsIgnoreCase("w") || cmd.getName().equalsIgnoreCase("pm") || cmd.getName().equalsIgnoreCase("mp"))
 			new TellCommand(this, sender, args);
-		else {
+		else if(cmd.getName().equalsIgnoreCase("r") || cmd.getName().equalsIgnoreCase("reply"))
+			new ReplyCommand(this, sender, args);
+		else if(cmd.getName().equalsIgnoreCase("life") || cmd.getName().equalsIgnoreCase("health"))
+			new LifeCommand(this, sender, args);
+		else
 			return false;
-		}
 		return true;
 	}
 

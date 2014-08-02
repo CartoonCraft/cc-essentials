@@ -98,3 +98,15 @@ commands:
     rand:
         description: Return a random number between two given numbers. (default 1-100)
         usage: /rand | /rand <x-y> | /rand <x> <y>
+    r:
+        description: Reply to the latest message
+        usage: /r <message>
+    reply:
+        description: Reply to the latest message
+        usage: /reply <message>
+    life:
+        description: Returns the player's HP.
+        usage: /life <player>
+    health:
+        description: Returns the player's HP.
+        usage: /health <player>
