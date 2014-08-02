@@ -16,7 +16,7 @@ public class LifeCommand extends CCCommand {
 		if(sender.isOp() || (plugin.isUsingPermissions() && sender.hasPermission("cc-essentials.life"))) {
 			if(isPlayer(args[0])) {
 				Player p = getPlayer(args[0]);
-				sender.sendMessage(ChatColor.GRAY+getPlayerName(p)+" has "+ChatColor.RED+p.getHealth()+ChatColor.GRAY+" HP.");
+				sender.sendMessage(ChatColor.GRAY+getPlayerName(p)+ChatColor.GRAY+" has "+ChatColor.RED+p.getHealth()+ChatColor.GRAY+" HP.");
 			}
 		}
 	}

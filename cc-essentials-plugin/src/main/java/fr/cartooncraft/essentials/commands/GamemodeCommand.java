@@ -20,9 +20,11 @@ public class GamemodeCommand extends CCCommand {
 					Player p = getPlayer(sender);
 					if(p.getGameMode() == GameMode.ADVENTURE || p.getGameMode() == GameMode.SURVIVAL) {
 						p.setGameMode(GameMode.CREATIVE);
+						sender.sendMessage(ChatColor.GRAY+"You're now in gamemode "+ChatColor.RED+GameMode.CREATIVE.toString()+ChatColor.GRAY+".");
 					}
 					else {
 						p.setGameMode(GameMode.SURVIVAL);
+						sender.sendMessage(ChatColor.GRAY+"You're now in gamemode "+ChatColor.RED+GameMode.SURVIVAL.toString()+ChatColor.GRAY+".");
 					}
 				}
 				else {
