@@ -25,7 +25,7 @@ public class BroadcastCommand extends CCCommand {
 			if (message.length() > 0 && message.charAt(message.length()-1)==' ') {
 				message = message.substring(0, message.length()-1);
 			}
-			message.replace('&', ChatColor.COLOR_CHAR);
+			message = message.replace('&', ChatColor.COLOR_CHAR);
 			Bukkit.broadcastMessage(message);
 		}
 		else {
