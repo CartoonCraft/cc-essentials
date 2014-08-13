@@ -13,7 +13,7 @@ public class ListCommand extends CCCommand {
 	CCEssentials plugin;
 	public ListCommand(CCEssentials plugin2, CommandSender sender) {
 		plugin = plugin2;
-		if(plugin.isUsingPermissions() && sender.hasPermission("cc-essentials.list")) {
+		if(!plugin.isUsingPermissions() || (plugin.isUsingPermissions() && sender.hasPermission("cc-essentials.list"))) {
 			sender.sendMessage(ChatColor.GRAY+"Online players: "+ChatColor.RED+Bukkit.getOnlinePlayers().length);
 			String message = ""+ChatColor.GRAY;
 			int i = 0;
