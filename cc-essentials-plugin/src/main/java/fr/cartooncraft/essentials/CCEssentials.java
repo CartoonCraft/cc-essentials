@@ -27,6 +27,7 @@ import fr.cartooncraft.essentials.commands.SuicideCommand;
 import fr.cartooncraft.essentials.commands.TPAllCommand;
 import fr.cartooncraft.essentials.commands.TPCommand;
 import fr.cartooncraft.essentials.commands.TellCommand;
+import fr.cartooncraft.essentials.commands.XPCommand;
 import fr.cartooncraft.essentials.events.listeners.ChatEvent;
 import fr.cartooncraft.essentials.events.listeners.DamageEvent;
 import fr.cartooncraft.essentials.events.listeners.InteractEvent;
@@ -78,6 +79,8 @@ public class CCEssentials extends JavaPlugin {
 			new TPCommand(this, sender, args);
 		else if(cmd.getName().equalsIgnoreCase("kill"))
 			new KillCommand(this, sender, args);
+		else if(cmd.getName().equalsIgnoreCase("xp"))
+			new XPCommand(this, sender, args);
 		else if(cmd.getName().equalsIgnoreCase("suicide"))
 			new SuicideCommand(this, sender);
 		else if(cmd.getName().equalsIgnoreCase("broadcast"))
