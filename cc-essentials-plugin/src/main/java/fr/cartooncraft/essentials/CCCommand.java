@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 
 public class CCCommand {
 
-	public String noPermission = ""+ChatColor.RESET+ChatColor.RED+"Sorry, you're not authorized to do this.";
+	public String noPermission = ""+ChatColor.RESET+ChatColor.RED+"Sorry, you're not allowed to do this.";
 	public String senderConsole = ""+ChatColor.RESET+ChatColor.RED+"Sorry, you're a console, you can't do this!";
 	
 	public boolean isPlayer(CommandSender sender) {
@@ -39,7 +39,7 @@ public class CCCommand {
 	}
 	
 	public String getPlayerNotFoundSentence(String name) {
-		return ChatColor.RED+"Can't find "+name+". Is him offline?";
+		return ChatColor.RED+"Can't find "+name+". Is he offline?";
 	}
 	
 	public String getPlayerName(Player p) {
