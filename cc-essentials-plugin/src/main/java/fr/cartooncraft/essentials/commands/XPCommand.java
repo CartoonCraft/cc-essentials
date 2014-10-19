@@ -63,10 +63,10 @@ public class XPCommand extends CCCommand {
 						int XPAmount;
 						boolean isLevel = args[2].endsWith("l") || args[2].endsWith("L");
 						if(isLevel) {
-							XPAmount = Integer.getInteger(args[2].substring(0, args[2].length() - 1));
+							XPAmount = Integer.parseInt(args[2].substring(0, args[2].length() - 1));
 						}
 						else {
-							XPAmount = Integer.getInteger(args[2]);
+							XPAmount = Integer.parseInt(args[2]);
 						}
 						if(args[1] == "set") {
 							if(isLevel) {
