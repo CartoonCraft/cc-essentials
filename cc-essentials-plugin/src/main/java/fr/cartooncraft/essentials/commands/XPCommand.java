@@ -68,8 +68,7 @@ public class XPCommand extends CCCommand {
 						else {
 							XPAmount = Float.parseFloat(args[2]);
 						}
-						System.out.println(args[1]);
-						if(args[1] == "set") {
+						if(args[1].equalsIgnoreCase("set")) {
 							if(isLevel) {
 								p.setExp(0F);
 								p.giveExpLevels((int)XPAmount);
@@ -78,7 +77,7 @@ public class XPCommand extends CCCommand {
 								p.setExp(XPAmount);
 							}
 						}
-						else if(args[1] == "add") {
+						else if(args[1].equalsIgnoreCase("add")) {
 							if(isLevel) {
 								p.giveExpLevels((int)XPAmount);
 							}
@@ -86,13 +85,16 @@ public class XPCommand extends CCCommand {
 								p.setExp(p.getExp()+XPAmount);
 							}
 						}
-						else if(args[1] == "remove") {
+						else if(args[1].equalsIgnoreCase("remove")) {
 							if(isLevel) {
 								p.giveExpLevels((int)-XPAmount);
 							}
 							else {
 								p.setExp(p.getExp()-XPAmount);
 							}
+						}
+						else {
+							sender.sendMessage(ChatColor.RED+"Nope! Usage: /xp [player] [get|set|add|remove] amount<L>");
 						}
 						String msg = ""+ChatColor.RED+XPAmount+ChatColor.GRAY+" ";
 						if(isLevel) {
