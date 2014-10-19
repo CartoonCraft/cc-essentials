@@ -68,6 +68,7 @@ public class XPCommand extends CCCommand {
 						else {
 							XPAmount = Float.parseFloat(args[2]);
 						}
+						System.out.println(args[1]);
 						if(args[1] == "set") {
 							if(isLevel) {
 								p.setExp(0F);
