@@ -113,3 +113,9 @@ commands:
     xp:
         description: Returns or set the player's experience.
         usage: /xp [player] [get|set|add|remove] amount<L>
+    head:
+        description: Give you a player's head.
+        usage: /head <player>
+    top:
+        description: Teleports yourself to the highest block.
+        usage: /top

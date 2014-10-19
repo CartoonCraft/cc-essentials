@@ -57,6 +57,9 @@ public class CCCommand {
 		if(playerName == "CONSOLE") {
 			name = ChatColor.RED+"CONSOLE";
 		}
+		else if(!isPlayer(playerName)) {
+			name = ChatColor.WHITE+playerName;
+		}
 		else {
 			Player p = Bukkit.getPlayer(playerName);
 			if(p.isOp())

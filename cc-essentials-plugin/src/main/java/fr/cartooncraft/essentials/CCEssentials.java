@@ -11,6 +11,7 @@ import fr.cartooncraft.essentials.commands.FeedAllCommand;
 import fr.cartooncraft.essentials.commands.FeedCommand;
 import fr.cartooncraft.essentials.commands.GamemodeCommand;
 import fr.cartooncraft.essentials.commands.GodModeCommand;
+import fr.cartooncraft.essentials.commands.HeadCommand;
 import fr.cartooncraft.essentials.commands.HealAllCommand;
 import fr.cartooncraft.essentials.commands.HealCommand;
 import fr.cartooncraft.essentials.commands.IsInGodModeCommand;
@@ -27,6 +28,7 @@ import fr.cartooncraft.essentials.commands.SuicideCommand;
 import fr.cartooncraft.essentials.commands.TPAllCommand;
 import fr.cartooncraft.essentials.commands.TPCommand;
 import fr.cartooncraft.essentials.commands.TellCommand;
+import fr.cartooncraft.essentials.commands.TopCommand;
 import fr.cartooncraft.essentials.commands.XPCommand;
 import fr.cartooncraft.essentials.events.listeners.ChatEvent;
 import fr.cartooncraft.essentials.events.listeners.DamageEvent;
@@ -75,12 +77,16 @@ public class CCEssentials extends JavaPlugin {
 			new SpawnCommand(this, sender, args);
 		else if(cmd.getName().equalsIgnoreCase("list"))
 			new ListCommand(this, sender);
+		else if(cmd.getName().equalsIgnoreCase("top"))
+			new TopCommand(this, sender);
 		else if(cmd.getName().equalsIgnoreCase("tp") || cmd.getName().equalsIgnoreCase("teleport"))
 			new TPCommand(this, sender, args);
 		else if(cmd.getName().equalsIgnoreCase("kill"))
 			new KillCommand(this, sender, args);
 		else if(cmd.getName().equalsIgnoreCase("xp"))
 			new XPCommand(this, sender, args);
+		else if(cmd.getName().equalsIgnoreCase("head"))
+			new HeadCommand(this, sender, args);
 		else if(cmd.getName().equalsIgnoreCase("suicide"))
 			new SuicideCommand(this, sender);
 		else if(cmd.getName().equalsIgnoreCase("broadcast"))
