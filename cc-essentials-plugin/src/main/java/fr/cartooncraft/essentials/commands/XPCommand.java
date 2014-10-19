@@ -25,11 +25,11 @@ public class XPCommand extends CCCommand {
 			}
 		}
 		else {
-			if(sender.isOp() || (plugin.isUsingPermissions() && sender.hasPermission("cc-essentials.xp.set"))) {
+			if(sender.isOp() || (plugin.isUsingPermissions() && sender.hasPermission("cc-essentials.xp.get"))) {
 				if(args.length == 1) {
 					if(isPlayer(args[0])) {
 						Player p = getPlayer(args[0]);
-						sender.sendMessage(ChatColor.GRAY+getPlayerName(p)+" has "+ChatColor.RED+p.getExp()+ChatColor.GRAY+", "+ChatColor.RED+p.getExpToLevel()+ChatColor.GRAY+" levels.");
+						sender.sendMessage(ChatColor.GRAY+getPlayerName(p)+ChatColor.GRAY+" has "+ChatColor.RED+p.getExp()+ChatColor.GRAY+", "+ChatColor.RED+p.getExpToLevel()+ChatColor.GRAY+" levels.");
 					}
 					else {
 						sender.sendMessage(getPlayerNotFoundSentence(args[0]));
@@ -37,13 +37,13 @@ public class XPCommand extends CCCommand {
 				}
 				else if(args.length == 2) {
 					if(!isPlayer(args[0])) {
-						sender.sendMessage("Nope! Usage: /xp [player] [get|set|add|remove] amount<L>");
+						sender.sendMessage(ChatColor.RED+"Nope! Usage: /xp [player] [get|set|add|remove] amount<L>");
 					}
-					else if(args[1] == "get") {
+					else if(args[1].equalsIgnoreCase("get")) {
 						Player p = getPlayer(args[0]);
-						sender.sendMessage(ChatColor.GRAY+getPlayerName(p)+" has "+ChatColor.RED+p.getExp()+ChatColor.GRAY+", "+ChatColor.RED+p.getExpToLevel()+ChatColor.GRAY+" levels.");
+						sender.sendMessage(ChatColor.GRAY+getPlayerName(p)+ChatColor.GRAY+" has "+ChatColor.RED+p.getExp()+ChatColor.GRAY+", "+ChatColor.RED+p.getExpToLevel()+ChatColor.GRAY+" levels.");
 					}
-					else if(args[1] != "set" || args[2] != "add" || args[1] != "remove") {
+					else if(!(args[1].equalsIgnoreCase("set") || args[1].equalsIgnoreCase("add") || args[1].equalsIgnoreCase("remove"))) {
 						sender.sendMessage(ChatColor.RED+"Nope! Usage: /xp "+args[0]+" [get|set|add|remove] amount<L>");
 					}
 					else {
@@ -54,7 +54,7 @@ public class XPCommand extends CCCommand {
 					if(!isPlayer(args[0])) {
 						sender.sendMessage(getPlayerNotFoundSentence(args[0]));
 					}
-					else if(args[1] != "get" || args[1] != "set" || args[2] != "add" || args[1] != "remove") {
+					else if(!(args[1].equalsIgnoreCase("set") || args[1].equalsIgnoreCase("get") || args[1].equalsIgnoreCase("remove") || args[1].equalsIgnoreCase("add"))) {
 						sender.sendMessage(ChatColor.RED+"Nope! Usage: /xp "+args[0]+" [get|set|add|remove] amount<L>");
 					}
 					else {
