@@ -58,7 +58,7 @@ public class XPCommand extends CCCommand {
 						sender.sendMessage(ChatColor.RED+"Nope! Usage: /xp "+args[0]+" [get|set|add|remove] amount<L>");
 					}
 					else {
-						Player p = getPlayer(args[1]);
+						Player p = getPlayer(args[0]);
 						
 						int XPAmount;
 						boolean isLevel = args[2].endsWith("l") || args[2].endsWith("L");
