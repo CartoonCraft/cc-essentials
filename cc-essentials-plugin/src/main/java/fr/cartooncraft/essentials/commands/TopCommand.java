@@ -15,7 +15,7 @@ public class TopCommand extends CCCommand {
 		if(isPlayer(sender)) {
 			if(sender.isOp() || (plugin.isUsingPermissions() && sender.hasPermission("cc-essentials.top"))) {
 				Player p = getPlayer(sender);
-				p.teleport(new Location(p.getWorld(), p.getLocation().getX(), p.getWorld().getHighestBlockYAt(p.getLocation())+1, p.getLocation().getZ(), p.getLocation().getYaw(), p.getLocation().getPitch()));
+				p.teleport(new Location(p.getWorld(), p.getLocation().getX(), p.getWorld().getHighestBlockYAt(p.getLocation()), p.getLocation().getZ(), p.getLocation().getYaw(), p.getLocation().getPitch()));
 			}
 			else {
 				sender.sendMessage(noPermission);
