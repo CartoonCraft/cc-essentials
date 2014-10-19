@@ -17,7 +17,7 @@ public class XPCommand extends CCCommand {
 			if(sender.isOp() || (plugin.isUsingPermissions() && sender.hasPermission("cc-essentials.xp"))) {
 				if(isPlayer(sender)) {
 					Player p = getPlayer(sender);
-					sender.sendMessage(ChatColor.GRAY+"You have "+ChatColor.RED+p.getExp()+ChatColor.GRAY+", "+ChatColor.RED+p.getExpToLevel()+ChatColor.GRAY+" levels.");
+					sender.sendMessage(ChatColor.GRAY+"You have "+ChatColor.RED+p.getExp()+ChatColor.GRAY+", "+ChatColor.RED+p.getLevel()+ChatColor.GRAY+" levels.");
 				}
 				else {
 					sender.sendMessage(senderConsole);
@@ -29,7 +29,7 @@ public class XPCommand extends CCCommand {
 				if(args.length == 1) {
 					if(isPlayer(args[0])) {
 						Player p = getPlayer(args[0]);
-						sender.sendMessage(ChatColor.GRAY+getPlayerName(p)+ChatColor.GRAY+" has "+ChatColor.RED+p.getExp()+ChatColor.GRAY+", "+ChatColor.RED+p.getExpToLevel()+ChatColor.GRAY+" levels.");
+						sender.sendMessage(ChatColor.GRAY+getPlayerName(p)+ChatColor.GRAY+" has "+ChatColor.RED+p.getExp()+ChatColor.GRAY+", "+ChatColor.RED+p.getLevel()+ChatColor.GRAY+" levels.");
 					}
 					else {
 						sender.sendMessage(getPlayerNotFoundSentence(args[0]));
@@ -41,7 +41,7 @@ public class XPCommand extends CCCommand {
 					}
 					else if(args[1].equalsIgnoreCase("get")) {
 						Player p = getPlayer(args[0]);
-						sender.sendMessage(ChatColor.GRAY+getPlayerName(p)+ChatColor.GRAY+" has "+ChatColor.RED+p.getExp()+ChatColor.GRAY+", "+ChatColor.RED+p.getExpToLevel()+ChatColor.GRAY+" levels.");
+						sender.sendMessage(ChatColor.GRAY+getPlayerName(p)+ChatColor.GRAY+" has "+ChatColor.RED+p.getExp()+ChatColor.GRAY+", "+ChatColor.RED+p.getLevel()+ChatColor.GRAY+" levels.");
 					}
 					else if(!(args[1].equalsIgnoreCase("set") || args[1].equalsIgnoreCase("add") || args[1].equalsIgnoreCase("remove"))) {
 						sender.sendMessage(ChatColor.RED+"Nope! Usage: /xp "+args[0]+" [get|set|add|remove] amount<L>");
