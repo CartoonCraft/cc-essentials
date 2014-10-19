@@ -105,7 +105,7 @@ public class XPCommand extends CCCommand {
 							msg += "you.";
 						}
 						else {
-							msg += getPlayerName(p)+".";
+							msg += getPlayerName(p)+ChatColor.GRAY+".";
 						}
 						sender.sendMessage(msg);
 					}

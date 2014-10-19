@@ -105,11 +105,14 @@ commands:
         description: Reply to the latest message
         usage: /reply <message>
     life:
-        description: Returns the player's HP.
-        usage: /life <player>
+        description: Returns or modify the player's HP.
+        usage: /life <player> [get|set|add|remove] amount
+    hp:
+        description: Returns or modify the player's HP.
+        usage: /hp <player> [get|set|add|remove] amount
     health:
-        description: Returns the player's HP.
-        usage: /health <player>
+        description: Returns or modify the player's HP.
+        usage: /health <player> [get|set|add|remove] amount
     xp:
         description: Returns or set the player's experience.
         usage: /xp [player] [get|set|add|remove] amount<L>
