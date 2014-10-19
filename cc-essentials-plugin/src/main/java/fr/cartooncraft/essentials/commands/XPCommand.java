@@ -20,7 +20,7 @@ public class XPCommand extends CCCommand {
 					sender.sendMessage(ChatColor.GRAY+"You have "+ChatColor.RED+p.getExp()+ChatColor.GRAY+", "+ChatColor.RED+p.getExpToLevel()+ChatColor.GRAY+" levels.");
 				}
 				else {
-					sender.sendMessage(ChatColor.RED+"Nope! Usage: /xp [player] [get|set|add|remove] amount<L>");
+					sender.sendMessage(senderConsole);
 				}
 			}
 		}
