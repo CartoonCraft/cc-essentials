@@ -110,3 +110,6 @@ commands:
     health:
         description: Returns the player's HP.
         usage: /health <player>
+    xp:
+        description: Returns or set the player's experience.
+        usage: /xp [player] [get|set|add|remove] amount<L>
