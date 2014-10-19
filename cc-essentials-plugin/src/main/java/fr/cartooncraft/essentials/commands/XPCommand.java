@@ -60,18 +60,18 @@ public class XPCommand extends CCCommand {
 					else {
 						Player p = getPlayer(args[0]);
 						
-						int XPAmount;
+						float XPAmount;
 						boolean isLevel = args[2].endsWith("l") || args[2].endsWith("L");
 						if(isLevel) {
 							XPAmount = Integer.parseInt(args[2].substring(0, args[2].length() - 1));
 						}
 						else {
-							XPAmount = Integer.parseInt(args[2]);
+							XPAmount = Float.parseFloat(args[2]);
 						}
 						if(args[1] == "set") {
 							if(isLevel) {
-								p.setExp(0);
-								p.giveExpLevels(XPAmount);
+								p.setExp(0F);
+								p.giveExpLevels((int)XPAmount);
 							}
 							else {
 								p.setExp(XPAmount);
@@ -79,18 +79,18 @@ public class XPCommand extends CCCommand {
 						}
 						else if(args[1] == "add") {
 							if(isLevel) {
-								p.giveExpLevels(XPAmount);
+								p.giveExpLevels((int)XPAmount);
 							}
 							else {
-								p.giveExp(XPAmount);
+								p.setExp(p.getExp()+XPAmount);
 							}
 						}
 						else if(args[1] == "remove") {
 							if(isLevel) {
-								p.giveExpLevels(-XPAmount);
+								p.giveExpLevels((int)-XPAmount);
 							}
 							else {
-								p.giveExp(-XPAmount);
+								p.setExp(p.getExp()-XPAmount);
 							}
 						}
 						String msg = ""+ChatColor.RED+XPAmount+ChatColor.GRAY+" ";
