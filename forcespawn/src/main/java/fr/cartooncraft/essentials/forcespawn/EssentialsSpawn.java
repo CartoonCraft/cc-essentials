@@ -1,4 +1,4 @@
-package fr.cartooncraft.essentials.lag;
+package fr.cartooncraft.essentials.forcespawn;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
