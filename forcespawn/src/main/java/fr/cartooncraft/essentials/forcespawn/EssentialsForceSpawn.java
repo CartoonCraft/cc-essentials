@@ -7,7 +7,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class EssentialsSpawn extends JavaPlugin implements Listener {
+public class EssentialsForceSpawn extends JavaPlugin implements Listener {
 	
 	public void onEnable() {
 		getServer().getPluginManager().registerEvents(this, this);
