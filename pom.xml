@@ -49,6 +49,7 @@
   </dependencies>
   <modules>
   	<module>lag</module>
+  	<module>forcespawn</module>
   	<module>cc-essentials-plugin</module>
   </modules>
 </project>
