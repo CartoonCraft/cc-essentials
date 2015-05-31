@@ -15,7 +15,7 @@ public class KickallOPCommand extends CCCommand {
 	public KickallOPCommand(CCEssentials plugin2, CommandSender sender, String[] args) {
 		plugin = plugin2;
 		if(sender.isOp() || (plugin.isUsingPermissions() && sender.hasPermission("cc-essentials.kickallop"))) {
-			Player[] players = Bukkit.getOnlinePlayers();
+			Player[] players = Bukkit.getOnlinePlayers().toArray(new Player[Bukkit.getOnlinePlayers().size()]);
 			
 			// Getting reason
 			

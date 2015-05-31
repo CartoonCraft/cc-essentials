@@ -18,7 +18,7 @@ public class GamemodeCommand extends CCCommand {
 			if(args.length == 0) {
 				if(isPlayer(sender)) {
 					Player p = getPlayer(sender);
-					if(p.getGameMode() == GameMode.ADVENTURE || p.getGameMode() == GameMode.SURVIVAL) {
+					if(p.getGameMode() != GameMode.CREATIVE) {
 						p.setGameMode(GameMode.CREATIVE);
 						sender.sendMessage(ChatColor.GRAY+"You're now in gamemode "+ChatColor.RED+GameMode.CREATIVE.toString()+ChatColor.GRAY+".");
 					}
@@ -32,13 +32,15 @@ public class GamemodeCommand extends CCCommand {
 				}
 			}
 			else if(args.length == 1) {
-				if(args[0].equals("0") || args[0].equals("1") || args[0].equals("2")) {
+				if(args[0].equals("0") || args[0].equals("1") || args[0].equals("2") || args[0].equals("3")) {
 					if(isPlayer(sender)) {
 						GameMode gamemode = GameMode.SURVIVAL;
 						if(args[0].equals("1"))
 							gamemode = GameMode.CREATIVE;
 						else if(args[0].equals("2"))
 							gamemode = GameMode.ADVENTURE;
+						else if(args[0].equals("3"))
+							gamemode = GameMode.SPECTATOR;
 						else
 							gamemode = GameMode.SURVIVAL;
 						getPlayer(sender).setGameMode(gamemode);
@@ -51,7 +53,7 @@ public class GamemodeCommand extends CCCommand {
 				else if(isPlayer(args[0])) {
 					Player p = getPlayer(args[0]);
 					GameMode gamemode = GameMode.CREATIVE;
-					if(p.getGameMode() == GameMode.ADVENTURE || p.getGameMode() == GameMode.SURVIVAL) {
+					if(p.getGameMode() != GameMode.CREATIVE) {
 						p.setGameMode(GameMode.CREATIVE);
 					}
 					else {
@@ -61,7 +63,7 @@ public class GamemodeCommand extends CCCommand {
 					sender.sendMessage(ChatColor.GRAY+getPlayerName(p)+ChatColor.GRAY+" is now in gamemode "+ChatColor.RED+gamemode.toString()+ChatColor.GRAY+".");
 				}
 				else {
-					sender.sendMessage(ChatColor.RED+"Usage: /gamemode | /gamemode <0|1|2> | /gamemode <name> | /gamemode <name> <mode>");
+					sender.sendMessage(ChatColor.RED+"Usage: /gamemode | /gamemode <0|1|2|3> | /gamemode <name> | /gamemode <name> <mode>");
 				}
 			}
 			else if(args.length == 2) {
@@ -71,6 +73,8 @@ public class GamemodeCommand extends CCCommand {
 						gamemode = GameMode.CREATIVE;
 					else if(args[1].equals("2"))
 						gamemode = GameMode.ADVENTURE;
+					else if(args[1].equals("3"))
+						gamemode = GameMode.SPECTATOR;
 					else
 						gamemode = GameMode.SURVIVAL;
 					getPlayer(args[0]).setGameMode(gamemode);

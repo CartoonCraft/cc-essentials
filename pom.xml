@@ -27,7 +27,7 @@
     </repository>
     <repository>
       <id>lagmeter-repo</id>
-      <url>http://msp.cartooncraft.fr/lagmeter/</url>
+      <url>http://msp.cartooncraft.fr/lagometer/</url>
     </repository>
   </repositories>
   
@@ -35,7 +35,7 @@
     <dependency>
       <groupId>org.bukkit</groupId>
       <artifactId>bukkit</artifactId>
-      <version>1.6.4-R2.0</version>
+      <version>1.8.6-R0.1</version>
       <type>jar</type>
       <scope>provided</scope>
     </dependency>

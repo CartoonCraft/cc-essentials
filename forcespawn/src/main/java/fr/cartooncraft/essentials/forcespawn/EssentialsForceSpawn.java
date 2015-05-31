@@ -4,7 +4,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerLoginEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class EssentialsForceSpawn extends JavaPlugin implements Listener {
@@ -23,7 +23,8 @@ public class EssentialsForceSpawn extends JavaPlugin implements Listener {
 	}
 	
 	@EventHandler
-	public void onLogin(PlayerLoginEvent e) {
+	public void onLogin(PlayerJoinEvent e) {
+		getLogger().info("Teleported to spawn the player "+e.getPlayer().getName());
 		e.getPlayer().teleport(e.getPlayer().getWorld().getSpawnLocation());
 	}
 	
