@@ -1,6 +1,7 @@
-name: CC-Essentials
-main: fr.cartooncraft.essentials.CCEssentials
+name: CC-Essentials-plugin
+main: fr.cartooncraft.essentials.plugin.CCEssentials
 version: 1.0
+depend: [CC-Essentials-lib]
 commands:
     list:
         description: Return players list.
