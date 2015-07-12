@@ -12,9 +12,7 @@ commands:
     tp:
         description: Teleports you to another player, or teleport a player to another.
         usage: /tp <player> | /tp <player1> <player2> | /tp <x> <y> <z> | /tp <player> <x> <y> <z>
-    teleport:
-        description: Teleports you to another player, or teleport a player to another.
-        usage: /teleport <player> | /teleport <player1> <player2> | /teleport <x> <y> <z> | /teleport <player> <x> <y> <z>
+        aliases: [teleport]
     kill:
         description: Kill yourself or a player
         usage: /kill [player]
@@ -24,32 +22,12 @@ commands:
     tell:
         description: Send a message to another guy.
         usage: /tell <player> <msg>
-    whisp:
-        description: Send a message to another guy.
-        usage: /whisp <player> <msg>
-    whisper:
-        description: Send a message to another guy.
-        usage: /whisper <player> <msg>
-    t:
-        description: Send a message to another guy.
-        usage: /t <player> <msg>
-    w:
-        description: Send a message to another guy.
-        usage: /w <player> <msg>
-    pm:
-        description: Send a message to another guy.
-        usage: /pm <player> <msg>
-    mp:
-        description: Send a message to another guy.
-        usage: /mp <player> <msg>
-    msg:
-        description: Send a message to another guy.
-        usage: /msg <player> <msg>
+        aliases: [whisp, whisper, t, w, pm, mp, msg]
     kick:
         description: Kick a player with reason.
         usage: /kick <player> [reason]
     suicide:
-        description: Suicide you.
+        description: Kill yourself.
         usage: /suicide
     heal:
         description: Heal a player.
@@ -72,48 +50,30 @@ commands:
     kickallop:
         description: Kick all players (include OPs, except you).
         usage: /kickallop <reason>
-    god:
-        description: Toggle godmode for yourself or the specified player.
-        usage: /god [player]
     godmode:
         description: Toggle godmode for yourself or the specified player.
         usage: /godmode [player]
-    gm:
-        description: Change the player's godmode.
-        usage: /gm | /gm <0|1|2> | /gm <name> | /gm <name> <mode>
+        aliases: [god]
     gamemode:
         description: Change the player's godmode.
         usage: /gamemode | /gamemode <0|1|2> | /gamemode <name> | /gamemode <name> <mode>
-    isingod:
-        description: Tell the sender if the sender or the specified player is in godmode.
-        usage: /isingod [player]
+        aliases: [gm]
     isingodmode:
         description: Tell the sender if the sender or the specified player is in godmode.
         usage: /isingodmode [player]
+        aliases: [isingod, isgod]
     roll:
         description: Return a random number between two given numbers. (default 1-100)
         usage: /roll | /roll <x-y> | /roll <x> <y>
-    random:
-        description: Return a random number between two given numbers. (default 1-100)
-        usage: /random | /random <x-y> | /random <x> <y>
-    rand:
-        description: Return a random number between two given numbers. (default 1-100)
-        usage: /rand | /rand <x-y> | /rand <x> <y>
-    r:
-        description: Reply to the latest message
-        usage: /r <message>
+        aliases: [random, rand]
     reply:
         description: Reply to the latest message
         usage: /reply <message>
+        aliases: [r]
     life:
         description: Returns or modify the player's HP.
         usage: /life <player> [get|set|add|remove] amount
-    hp:
-        description: Returns or modify the player's HP.
-        usage: /hp <player> [get|set|add|remove] amount
-    health:
-        description: Returns or modify the player's HP.
-        usage: /health <player> [get|set|add|remove] amount
+        aliases: [hp, health]
     xp:
         description: Returns or set the player's experience.
         usage: /xp [player] [get|set|add|remove] amount<L>
@@ -121,5 +81,5 @@ commands:
         description: Give you a player's head.
         usage: /head <player>
     top:
-        description: Teleports yourself to the highest block.
+        description: Teleport yourself to the highest block.
         usage: /top

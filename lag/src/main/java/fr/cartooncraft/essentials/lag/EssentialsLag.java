@@ -15,12 +15,12 @@ public class EssentialsLag extends JavaPlugin {
 	
 	public void onEnable() {
 		this.lagListenerID = LagMeter.getInstance().registerSyncLagListener(new LagListener(this));
-		getLogger().info("CC-Essentials-Lag is loaded.");
+		getLogger().info(getDescription().getName()+" v"+getDescription().getVersion()+" is loaded.");
 	}
 	
 	public void onDisable() {
 		LagMeter.getInstance().cancelSyncLagListener(this.lagListenerID);
-		getLogger().info("CC-Essentials-Lag is unloaded.");
+		getLogger().info(getDescription().getName()+" v"+getDescription().getVersion()+" is unloaded.");
 	}
 	
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {

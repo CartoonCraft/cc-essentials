@@ -100,11 +100,11 @@ public class CCEssentialsLibrary extends JavaPlugin {
 	// Bukkit plugin stuff
 	
 	public void onEnable() {
-		getLogger().info(getDescription().getName()+" version "+getDescription().getVersion()+" is loaded.");
+		getLogger().info(getDescription().getName()+" v"+getDescription().getVersion()+" is loaded.");
 	}
 	
 	public void onDisable() {
-		getLogger().info(getDescription().getName()+" version "+getDescription().getVersion()+" is unloaded.");
+		getLogger().info(getDescription().getName()+" v"+getDescription().getVersion()+" is unloaded.");
 	}
 	
 	

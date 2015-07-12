@@ -49,7 +49,7 @@ public class CCEssentials extends JavaPlugin {
 		Bukkit.getPluginManager().registerEvents(new DamageEvent(), this);
 		Bukkit.getPluginManager().registerEvents(new InteractEvent(this), this);
 		Bukkit.getPluginManager().registerEvents(new SignPlacedEvent(this), this);
-		getLogger().info("CC-Essentials is loaded.");
+		getLogger().info(getDescription().getName()+" v"+getDescription().getVersion()+" is loaded.");
 		
 		// Config file
 		
@@ -59,7 +59,7 @@ public class CCEssentials extends JavaPlugin {
 	}
 	
 	public void onDisable() {
-		getLogger().info("CC-Essentials is unloaded.");
+		getLogger().info(getDescription().getName()+" v"+getDescription().getVersion()+" is unloaded.");
 		
 		// Save players configs
 		for(Object fileName : ConfigManager.configs.keySet().toArray()) {
@@ -79,7 +79,7 @@ public class CCEssentials extends JavaPlugin {
 			new ListCommand(this, sender);
 		else if(cmd.getName().equalsIgnoreCase("top"))
 			new TopCommand(this, sender);
-		else if(cmd.getName().equalsIgnoreCase("tp") || cmd.getName().equalsIgnoreCase("teleport"))
+		else if(cmd.getName().equalsIgnoreCase("tp"))
 			new TPCommand(this, sender, args);
 		else if(cmd.getName().equalsIgnoreCase("kill"))
 			new KillCommand(this, sender, args);
@@ -107,19 +107,19 @@ public class CCEssentials extends JavaPlugin {
 			new FeedAllCommand(this, sender);
 		else if(cmd.getName().equalsIgnoreCase("kickallop"))
 			new KickallOPCommand(this, sender, args);
-		else if(cmd.getName().equalsIgnoreCase("gamemode") || cmd.getName().equalsIgnoreCase("gm"))
+		else if(cmd.getName().equalsIgnoreCase("gamemode"))
 			new GamemodeCommand(this, sender, args);
-		else if(cmd.getName().equalsIgnoreCase("isingod") || cmd.getName().equalsIgnoreCase("isingodmode"))
+		else if(cmd.getName().equalsIgnoreCase("isingod"))
 			new IsInGodModeCommand(this, sender, args);
-		else if(cmd.getName().equalsIgnoreCase("god") || cmd.getName().equalsIgnoreCase("godmode"))
+		else if(cmd.getName().equalsIgnoreCase("god"))
 			new GodModeCommand(this, sender, args);
-		else if(cmd.getName().equalsIgnoreCase("roll") || cmd.getName().equalsIgnoreCase("random") || cmd.getName().equalsIgnoreCase("rand"))
+		else if(cmd.getName().equalsIgnoreCase("roll"))
 			new RollCommand(this, sender, args);
-		else if(cmd.getName().equalsIgnoreCase("tell") || cmd.getName().equalsIgnoreCase("msg") || cmd.getName().equalsIgnoreCase("whisp") || cmd.getName().equalsIgnoreCase("t") || cmd.getName().equalsIgnoreCase("w") || cmd.getName().equalsIgnoreCase("pm") || cmd.getName().equalsIgnoreCase("mp"))
+		else if(cmd.getName().equalsIgnoreCase("tell"))
 			new TellCommand(this, sender, args);
-		else if(cmd.getName().equalsIgnoreCase("r") || cmd.getName().equalsIgnoreCase("reply"))
+		else if(cmd.getName().equalsIgnoreCase("r"))
 			new ReplyCommand(this, sender, args);
-		else if(cmd.getName().equalsIgnoreCase("life") || cmd.getName().equalsIgnoreCase("health"))
+		else if(cmd.getName().equalsIgnoreCase("life"))
 			new LifeCommand(this, sender, args);
 		else
 			return false;
