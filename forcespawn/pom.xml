@@ -5,7 +5,7 @@
     <artifactId>cc-essentials</artifactId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
-  <artifactId>forcespawn</artifactId>
+  <artifactId>cc-essentials-forcespawn</artifactId>
   
   <dependencies>
     <dependency>

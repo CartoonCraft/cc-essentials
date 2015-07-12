@@ -4,10 +4,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
 import main.java.com.webkonsept.minecraft.lagmeter.events.HighLagEvent;
-import fr.cartooncraft.essentials.CCCommand;
 import fr.cartooncraft.essentials.lag.EssentialsLag;
 
-public class LagListener extends CCCommand implements main.java.com.webkonsept.minecraft.lagmeter.listeners.LagListener {
+public class LagListener implements main.java.com.webkonsept.minecraft.lagmeter.listeners.LagListener {
 	
 	EssentialsLag plugin;
 	
