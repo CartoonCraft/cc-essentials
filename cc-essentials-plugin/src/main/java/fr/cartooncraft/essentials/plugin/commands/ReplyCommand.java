@@ -3,6 +3,7 @@ package fr.cartooncraft.essentials.plugin.commands;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.goblom.bukkitlibs.config.ConfigManager;
@@ -23,7 +24,13 @@ public class ReplyCommand {
 				argsList.add(arg);
 			}
 			plugin = plugin2;
-			new TellCommand(plugin, sender, args);
+			String[] tellArgs = new String[argsList.size()];
+			int i = 0;
+			for(Object arg : argsList.toArray()) {
+				tellArgs[i] = (String)arg;
+				i++;
+			}
+			new TellCommand(plugin, sender, tellArgs);
 		}
 		else {
 			sender.sendMessage(ChatColor.RED+"Nobody sent you a message! (or console)");

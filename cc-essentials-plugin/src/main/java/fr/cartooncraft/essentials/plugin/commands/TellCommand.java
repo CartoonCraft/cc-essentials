@@ -3,8 +3,8 @@ package fr.cartooncraft.essentials.plugin.commands;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
-import org.goblom.bukkitlibs.config.ConfigManager;
 
 import fr.cartooncraft.essentials.lib.CCEssentialsLibrary;
 import fr.cartooncraft.essentials.plugin.CCEssentials;
@@ -104,7 +104,7 @@ public class TellCommand {
 				p2.sendMessage(m);
 				sender.sendMessage(m);
 				CCEssentialsLibrary.getConfigFile(p2).set("lastCorrespondent", sender.getName());
-				CCEssentialsLibrary.getConfigFile(sender).set("lastCorrespondent", sender.getName());
+				CCEssentialsLibrary.getConfigFile(sender).set("lastCorrespondent", p2.getName());
 			}
 		}
 	}
