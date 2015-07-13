@@ -19,6 +19,7 @@ public class CCEssentialsLibrary extends JavaPlugin {
 		return(sender instanceof Player);
 	}
 	
+	@SuppressWarnings("deprecation")
 	public static boolean isPlayer(String p) {
 		return(Bukkit.getPlayer(p) != null);
 	}
@@ -38,8 +39,9 @@ public class CCEssentialsLibrary extends JavaPlugin {
 		return null;
 	}
 	
+	@SuppressWarnings("deprecation")
 	public static Player getPlayer(String sender) {
-		if(Bukkit.getPlayer(sender) != null) {
+		if(isPlayer(sender)) {
 			return Bukkit.getPlayer(sender);
 		}
 		else {
@@ -82,6 +84,23 @@ public class CCEssentialsLibrary extends JavaPlugin {
 		return name;
 	}
 	
+	public static String getPlayerName(CommandSender sender) {
+		if(isPlayer(sender)) {
+			CCEssentialsPlayer p = new CCEssentialsPlayer(getPlayer(sender));
+			return p.getPlayerName();
+		}
+		else {
+			return getColor(sender)+sender.getName();
+		}
+	}
+	
+	public static ChatColor getColor(CommandSender sender) {
+		if(sender.isOp())
+			return ChatColor.RED;
+		else
+			return ChatColor.WHITE;
+	}
+	
 	public static String getPlayerName(String playerName) {
 		
 		if(isPlayer(playerName)) {
@@ -96,6 +115,20 @@ public class CCEssentialsLibrary extends JavaPlugin {
 			}
 		}
 	}
+	
+	
+	public static String concatenateAllArgs(String[] args) {
+		String returnedString = "";
+		for(String arg : args) {
+			returnedString += arg+" ";
+		}
+		
+		if(returnedString.length() > 0)
+			returnedString = returnedString.substring(0, returnedString.length() - 1);
+		
+		return returnedString;
+	}
+	
 	
 	// Bukkit plugin stuff
 	
