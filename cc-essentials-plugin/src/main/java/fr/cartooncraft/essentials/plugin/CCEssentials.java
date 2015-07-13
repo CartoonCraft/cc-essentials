@@ -56,8 +56,10 @@ public class CCEssentials extends CCEssentialsJavaPlugin {
 		ConfigManager.load(this, "config.yml");
 		setUsingPermissions(ConfigManager.get("config.yml").getBoolean("usePermissions", false));
 		setEnableChat(ConfigManager.get("config.yml").getBoolean("enableChat", true));
-		
+
 		permissionsManager.setPermission(new CCEssentialsPermission("cc-essentials.tell", true));
+		permissionsManager.setPermission(new CCEssentialsPermission("cc-essentials.list", true));
+		permissionsManager.setPermission(new CCEssentialsPermission("cc-essentials.broadcast", false));
 	}
 	
 	public void onDisable() {
@@ -78,7 +80,7 @@ public class CCEssentials extends CCEssentialsJavaPlugin {
 		if(cmd.getName().equalsIgnoreCase("spawn"))
 			new SpawnCommand(this, sender, args);
 		else if(cmd.getName().equalsIgnoreCase("list"))
-			new ListCommand(this, sender);
+			new ListCommand(this, sender, cmd, label, args);
 		else if(cmd.getName().equalsIgnoreCase("top"))
 			new TopCommand(this, sender);
 		else if(cmd.getName().equalsIgnoreCase("tp"))
@@ -92,7 +94,7 @@ public class CCEssentials extends CCEssentialsJavaPlugin {
 		else if(cmd.getName().equalsIgnoreCase("suicide"))
 			new SuicideCommand(this, sender);
 		else if(cmd.getName().equalsIgnoreCase("broadcast"))
-			new BroadcastCommand(this, sender, args);
+			new BroadcastCommand(this, sender, cmd, label, args);
 		else if(cmd.getName().equalsIgnoreCase("kick"))
 			new KickCommand(this, sender, args);
 		else if(cmd.getName().equalsIgnoreCase("heal"))
@@ -118,9 +120,9 @@ public class CCEssentials extends CCEssentialsJavaPlugin {
 		else if(cmd.getName().equalsIgnoreCase("roll"))
 			new RollCommand(this, sender, args);
 		else if(cmd.getName().equalsIgnoreCase("tell"))
-			new TellCommand(this, sender, args, cmd);
+			new TellCommand(this, sender, cmd, label, args);
 		else if(cmd.getName().equalsIgnoreCase("reply"))
-			new ReplyCommand(this, sender, args, cmd);
+			new ReplyCommand(this, sender, cmd, label, args);
 		else if(cmd.getName().equalsIgnoreCase("life"))
 			new LifeCommand(this, sender, args);
 		else
