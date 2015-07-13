@@ -3,9 +3,10 @@ package fr.cartooncraft.essentials.plugin;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.plugin.java.JavaPlugin;
 import org.goblom.bukkitlibs.config.ConfigManager;
 
+import fr.cartooncraft.essentials.lib.CCEssentialsJavaPlugin;
+import fr.cartooncraft.essentials.lib.CCEssentialsPermission;
 import fr.cartooncraft.essentials.plugin.commands.BroadcastCommand;
 import fr.cartooncraft.essentials.plugin.commands.FeedAllCommand;
 import fr.cartooncraft.essentials.plugin.commands.FeedCommand;
@@ -37,9 +38,8 @@ import fr.cartooncraft.essentials.plugin.events.listeners.LeaveEvent;
 import fr.cartooncraft.essentials.plugin.events.listeners.LoginEvent;
 import fr.cartooncraft.essentials.plugin.events.listeners.SignPlacedEvent;
 
-public class CCEssentials extends JavaPlugin {
-
-	private boolean usePermissions;
+public class CCEssentials extends CCEssentialsJavaPlugin {
+	
 	private boolean enableChat;
 
 	public void onEnable() {
@@ -56,6 +56,8 @@ public class CCEssentials extends JavaPlugin {
 		ConfigManager.load(this, "config.yml");
 		setUsingPermissions(ConfigManager.get("config.yml").getBoolean("usePermissions", false));
 		setEnableChat(ConfigManager.get("config.yml").getBoolean("enableChat", true));
+		
+		permissionsManager.setPermission(new CCEssentialsPermission("cc-essentials.tell", true));
 	}
 	
 	public void onDisable() {
@@ -116,9 +118,9 @@ public class CCEssentials extends JavaPlugin {
 		else if(cmd.getName().equalsIgnoreCase("roll"))
 			new RollCommand(this, sender, args);
 		else if(cmd.getName().equalsIgnoreCase("tell"))
-			new TellCommand(this, sender, args);
-		else if(cmd.getName().equalsIgnoreCase("r"))
-			new ReplyCommand(this, sender, args);
+			new TellCommand(this, sender, args, cmd);
+		else if(cmd.getName().equalsIgnoreCase("reply"))
+			new ReplyCommand(this, sender, args, cmd);
 		else if(cmd.getName().equalsIgnoreCase("life"))
 			new LifeCommand(this, sender, args);
 		else
@@ -126,16 +128,8 @@ public class CCEssentials extends JavaPlugin {
 		return true;
 	}
 
-	public boolean isUsingPermissions() {
-		return usePermissions;
-	}
-
 	public boolean isChatEnabled() {
 		return enableChat;
-	}
-
-	public void setUsingPermissions(boolean usingPermissions) {
-		this.usePermissions = usingPermissions;
 	}
 
 	public void setEnableChat(boolean enableChat) {

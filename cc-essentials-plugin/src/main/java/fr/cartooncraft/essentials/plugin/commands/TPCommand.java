@@ -1,6 +1,5 @@
 package fr.cartooncraft.essentials.plugin.commands;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
@@ -18,11 +17,11 @@ public class TPCommand {
 			if(CCEssentialsLibrary.isPlayer(sender)) {
 				Player p = CCEssentialsLibrary.getPlayer(sender);
 				if(sender.isOp() || (plugin.isUsingPermissions() && (sender.hasPermission("cc-essentials.tpto") || sender.hasPermission("cc-essentials.tp")))) {
-					if(Bukkit.getPlayer(args[0]) == null) {
+					if(CCEssentialsLibrary.getPlayer(args[0]) == null) {
 						sender.sendMessage(CCEssentialsLibrary.getPlayerNotFoundSentence(args[0]));
 					}
 					else {
-						Player p2 = Bukkit.getPlayer(args[0]);
+						Player p2 = CCEssentialsLibrary.getPlayer(args[0]);
 						p.teleport(p2.getLocation());
 						sender.sendMessage(ChatColor.GRAY+"You have been teleported to "+CCEssentialsLibrary.getPlayerName(p2)+ChatColor.GRAY+".");
 					}
@@ -39,15 +38,15 @@ public class TPCommand {
 			if(sender.isOp() || (plugin.isUsingPermissions() && sender.hasPermission("cc-essentials.tp"))) {
 				Player p1 = null;
 				Player p2 = null;
-				if(Bukkit.getPlayer(args[0]) == null) {
+				if(CCEssentialsLibrary.getPlayer(args[0]) == null) {
 					sender.sendMessage(CCEssentialsLibrary.getPlayerNotFoundSentence(args[0]));
 				}
-				else if(Bukkit.getPlayer(args[1]) == null) {
+				else if(CCEssentialsLibrary.getPlayer(args[1]) == null) {
 					sender.sendMessage(CCEssentialsLibrary.getPlayerNotFoundSentence(args[1]));
 				}
 				else {
-					p1 = Bukkit.getPlayer(args[0]);
-					p2 = Bukkit.getPlayer(args[1]);
+					p1 = CCEssentialsLibrary.getPlayer(args[0]);
+					p2 = CCEssentialsLibrary.getPlayer(args[1]);
 					p1.teleport(p2);
 					sender.sendMessage(CCEssentialsLibrary.getPlayerName(p1)+ChatColor.GRAY+" has been teleported to "+CCEssentialsLibrary.getPlayerName(p2)+ChatColor.GRAY+".");
 				}

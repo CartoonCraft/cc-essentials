@@ -19,7 +19,7 @@ public class KickCommand {
 		}
 		else {
 			if(sender.isOp() || (plugin.isUsingPermissions() && (sender.hasPermission("cc-essentials.kickall") || sender.hasPermission("cc-essentials.kick")))) {
-				Player p = Bukkit.getPlayer(args[0]);
+				Player p = CCEssentialsLibrary.getPlayer(args[0]);
 				if(p == null) {
 					sender.sendMessage(CCEssentialsLibrary.getPlayerNotFoundSentence(args[0]));
 				}

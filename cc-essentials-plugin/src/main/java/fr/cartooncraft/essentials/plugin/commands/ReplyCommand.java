@@ -1,40 +1,43 @@
 package fr.cartooncraft.essentials.plugin.commands;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.goblom.bukkitlibs.config.ConfigManager;
 
 import fr.cartooncraft.essentials.lib.CCEssentialsLibrary;
+import fr.cartooncraft.essentials.lib.CCEssentialsPlayer;
 import fr.cartooncraft.essentials.plugin.CCEssentials;
 
 public class ReplyCommand {
 
-	CCEssentials plugin;
+	private static int neededArguments = 1;
 	
-	public ReplyCommand(CCEssentials plugin2, CommandSender sender, String[] args) {
-		String playerName = CCEssentialsLibrary.getConfigFile(sender).getString("lastCorrespondent", "CONSOLE");
-		if(!playerName.equals("CONSOLE")) {
-			List<String> argsList = new ArrayList<String>();
-			argsList.add(playerName);
-			for(String arg : args) {
-				argsList.add(arg);
+	public ReplyCommand(CCEssentials plugin, CommandSender sender, String[] args, Command cmd) {
+		if(hasPermission(sender, plugin)) {
+			if(CCEssentialsLibrary.isPlayer(sender)) {
+				CCEssentialsPlayer player = new CCEssentialsPlayer(CCEssentialsLibrary.getPlayer(sender));
+				if(args.length >= neededArguments) {
+					if(CCEssentialsLibrary.isPlayer(player.getLatestCorrespondant())) {
+						CCEssentialsPlayer p2 = new CCEssentialsPlayer(CCEssentialsLibrary.getPlayer(player.getLatestCorrespondant()));
+						p2.sendPrivateMessage(sender, CCEssentialsLibrary.concatenateAllArgs(args));
+						p2.setLatestCorrespondant(sender);
+					}
+					else {
+						sender.sendMessage(ChatColor.RED+"Your last correspondant ("+player.getLatestCorrespondant()+") is offline! :(");
+					}
+				}
+				else {
+					sender.sendMessage(ChatColor.RED+"Nope! Usage: "+cmd.getUsage());
+				}
 			}
-			plugin = plugin2;
-			String[] tellArgs = new String[argsList.size()];
-			int i = 0;
-			for(Object arg : argsList.toArray()) {
-				tellArgs[i] = (String)arg;
-				i++;
+			else {
+				sender.sendMessage(CCEssentialsLibrary.senderConsole);
 			}
-			new TellCommand(plugin, sender, tellArgs);
 		}
-		else {
-			sender.sendMessage(ChatColor.RED+"Nobody sent you a message! (or console)");
-		}
+	}
+	
+	public static boolean hasPermission(CommandSender sender, CCEssentials plugin) {
+		return TellCommand.hasPermission(sender, plugin);
 	}
 
 }

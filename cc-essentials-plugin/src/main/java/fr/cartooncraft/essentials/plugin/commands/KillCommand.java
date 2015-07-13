@@ -16,7 +16,7 @@ public class KillCommand {
 		plugin = plugin2;
 		if(args.length == 1) {
 			if(sender.isOp() || (plugin.isUsingPermissions() && sender.hasPermission("cc-essentials.kill"))) {
-				Player p = Bukkit.getPlayer(args[0]);
+				Player p = CCEssentialsLibrary.getPlayer(args[0]);
 				if(p != null) {
 					p.setHealth(0);
 				}

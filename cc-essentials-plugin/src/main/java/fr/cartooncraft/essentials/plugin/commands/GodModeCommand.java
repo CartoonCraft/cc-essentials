@@ -3,7 +3,6 @@ package fr.cartooncraft.essentials.plugin.commands;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.goblom.bukkitlibs.config.ConfigManager;
 
 import fr.cartooncraft.essentials.lib.CCEssentialsLibrary;
 import fr.cartooncraft.essentials.plugin.CCEssentials;

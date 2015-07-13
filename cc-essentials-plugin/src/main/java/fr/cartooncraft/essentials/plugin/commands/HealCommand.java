@@ -1,6 +1,5 @@
 package fr.cartooncraft.essentials.plugin.commands;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -28,8 +27,8 @@ public class HealCommand {
 				}
 			}
 			else if(args.length == 1) {
-				if(Bukkit.getPlayer(args[0]) != null) {
-					Player p = Bukkit.getPlayer(args[0]);
+				if(CCEssentialsLibrary.getPlayer(args[0]) != null) {
+					Player p = CCEssentialsLibrary.getPlayer(args[0]);
 					p.setHealth(20);
 					p.setFoodLevel(20);
 					p.setExhaustion(5F);

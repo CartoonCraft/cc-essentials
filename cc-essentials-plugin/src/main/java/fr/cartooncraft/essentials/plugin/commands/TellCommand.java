@@ -1,111 +1,52 @@
 package fr.cartooncraft.essentials.plugin.commands;
 
-import org.bukkit.Bukkit;
+import java.util.Arrays;
+
 import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.entity.Player;
 
 import fr.cartooncraft.essentials.lib.CCEssentialsLibrary;
+import fr.cartooncraft.essentials.lib.CCEssentialsPlayer;
 import fr.cartooncraft.essentials.plugin.CCEssentials;
 
 public class TellCommand {
+
+	private static String permission = "cc-essentials.tell";
+	private static int neededArguments = 2;
 	
-	CCEssentials plugin;
+	public TellCommand(CCEssentials plugin, CommandSender sender, String[] args, Command cmd) {
+		if(hasPermission(sender, plugin)) {
+			if(args.length >= neededArguments) {
+				if(CCEssentialsLibrary.isPlayer(args[0])) {
+					CCEssentialsPlayer p2 = new CCEssentialsPlayer(CCEssentialsLibrary.getPlayer(args[0]));
+					p2.sendPrivateMessage(sender, CCEssentialsLibrary.concatenateAllArgs(Arrays.copyOfRange(args, 1, args.length)));
+					p2.setLatestCorrespondant(sender);
+					if(CCEssentialsLibrary.isPlayer(sender)) {
+						new CCEssentialsPlayer(CCEssentialsLibrary.getPlayer(sender)).setLatestCorrespondant((CommandSender)p2.getPlayer());
+					}
+				}
+				else {
+					sender.sendMessage(CCEssentialsLibrary.getPlayerNotFoundSentence(args[0]));
+				}
+			}
+			else {
+				sender.sendMessage(ChatColor.RED+"Nope! Usage: "+cmd.getUsage());
+			}
+		}
+	}
 	
-	public TellCommand(CCEssentials plugin2, CommandSender sender, String[] args) {
+	public static boolean hasPermission(CommandSender sender, CCEssentials plugin) {
+		if(sender.isOp())
+			return true;
 		
-		plugin = plugin2;
-		if(plugin.isUsingPermissions()) {
-			if(sender.hasPermission("cc-essentials.tell")) {
-				if(args.length < 2) {
-					sender.sendMessage(ChatColor.RED+"Nope! Usage: /tell <player> <msg>");
-				}
-				else {
-					String message = "";
-					String playerName = "";
-					boolean firstArg = true;
-					for(String arg : args) {
-						if(firstArg) {
-							playerName = arg;
-						}
-						else {
-							message += arg+" ";
-						}
-						firstArg = false;
-					}
-					
-					// Remove last space - copy-paste from Stackoverflow :D
-					if (message.length() > 0 && message.charAt(message.length()-1)==' ') {
-						message = message.substring(0, message.length()-1);
-					}
-					
-					Player p2 = Bukkit.getPlayer(playerName);
-					if(p2 == null) {
-						sender.sendMessage(CCEssentialsLibrary.getPlayerNotFoundSentence(playerName));
-						return;
-					}
-					String m;
-					if(sender instanceof Player) {
-						Player p1 = (Player)sender;
-						m = ChatColor.GOLD+"["+ChatColor.GRAY+CCEssentialsLibrary.getPlayerName(p1)+ChatColor.GOLD+"->"+ChatColor.GRAY+CCEssentialsLibrary.getPlayerName(p2)+ChatColor.GOLD+"] "+ChatColor.RESET+message;
-						Bukkit.getConsoleSender().sendMessage(m);
-					}
-					else {
-						m = ChatColor.GOLD+"["+ChatColor.RED+"CONSOLE"+ChatColor.GOLD+"->"+ChatColor.GRAY+CCEssentialsLibrary.getPlayerName(p2)+ChatColor.GOLD+"] "+ChatColor.RESET+message;
-					}
-					p2.sendMessage(m);
-					sender.sendMessage(m);
-					CCEssentialsLibrary.getConfigFile(p2).set("lastCorrespondent", sender.getName());
-					CCEssentialsLibrary.getConfigFile(sender).set("lastCorrespondent", sender.getName());
-				}
-			}
-			else {
-				sender.sendMessage(CCEssentialsLibrary.noPermission);
-			}
+		if(CCEssentialsLibrary.isPlayer(sender)) {
+			CCEssentialsPlayer ccPlayer = new CCEssentialsPlayer(CCEssentialsLibrary.getPlayer(sender), plugin);
+			return ccPlayer.hasPermission(permission);
 		}
-		else {
-			if(args.length < 2) {
-				sender.sendMessage(ChatColor.RED+"Nope! Usage: /tell <player> <msg>");
-			}
-			else {
-				String message = "";
-				String playerName = "";
-				boolean firstArg = true;
-				for(String arg : args) {
-					if(firstArg) {
-						playerName = arg;
-					}
-					else {
-						message += arg+" ";
-					}
-					firstArg = false;
-				}
-				
-				// Remove last space - copy-paste from Stackoverflow :D
-				if (message.length() > 0 && message.charAt(message.length()-1)==' ') {
-					message = message.substring(0, message.length()-1);
-				}
-				
-				Player p2 = Bukkit.getPlayer(playerName);
-				if(p2 == null) {
-					sender.sendMessage(CCEssentialsLibrary.getPlayerNotFoundSentence(playerName));
-					return;
-				}
-				String m;
-				if(sender instanceof Player) {
-					Player p1 = (Player)sender;
-					m = ChatColor.GOLD+"["+ChatColor.GRAY+CCEssentialsLibrary.getPlayerName(p1)+ChatColor.GOLD+"->"+ChatColor.GRAY+CCEssentialsLibrary.getPlayerName(p2)+ChatColor.GOLD+"] "+ChatColor.RESET+message;
-					Bukkit.getConsoleSender().sendMessage(m);
-				}
-				else {
-					m = ChatColor.GOLD+"["+ChatColor.RED+"CONSOLE"+ChatColor.GOLD+"->"+ChatColor.GRAY+CCEssentialsLibrary.getPlayerName(p2)+ChatColor.GOLD+"] "+ChatColor.RESET+message;
-				}
-				p2.sendMessage(m);
-				sender.sendMessage(m);
-				CCEssentialsLibrary.getConfigFile(p2).set("lastCorrespondent", sender.getName());
-				CCEssentialsLibrary.getConfigFile(sender).set("lastCorrespondent", p2.getName());
-			}
-		}
+		else if(sender.hasPermission(permission))
+			return true;
+		else
+			return false;
 	}
 }
