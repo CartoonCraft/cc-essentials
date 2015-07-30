@@ -68,7 +68,7 @@ public class XPCommand extends CCEssentialsCommand {
 			}
 			else {
 				playerName = CCEssentialsLibrary.concatenateAllArgs(args);
-				action = "get";
+				action = "set";
 			}
 		}
 		else {
