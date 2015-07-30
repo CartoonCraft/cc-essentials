@@ -1,137 +1,138 @@
 package fr.cartooncraft.essentials.plugin.commands;
 
+import java.util.Arrays;
+
 import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
+import fr.cartooncraft.essentials.lib.CCEssentialsCommand;
+import fr.cartooncraft.essentials.lib.CCEssentialsJavaPlugin;
 import fr.cartooncraft.essentials.lib.CCEssentialsLibrary;
-import fr.cartooncraft.essentials.plugin.CCEssentials;
+import fr.cartooncraft.essentials.lib.CCEssentialsPlayer;
 
-public class LifeCommand {
-
-	CCEssentials plugin;
+public class LifeCommand extends CCEssentialsCommand {
 	
-	public LifeCommand(CCEssentials plugin2, CommandSender sender, String[] args) {
-		plugin = plugin2;
-		if(args.length == 0) {
-			if(sender.isOp() || (plugin.isUsingPermissions() && sender.hasPermission("cc-essentials.life.get.self"))) {
-				if(CCEssentialsLibrary.isPlayer(sender)) {
-					Player p = CCEssentialsLibrary.getPlayer(sender);
-					sender.sendMessage(ChatColor.GRAY+"You have "+ChatColor.RED+p.getHealth()+ChatColor.GRAY+" HP.");
-				}
-				else {
-					sender.sendMessage(CCEssentialsLibrary.senderConsole);
-				}
-			}
-		}
-		else {
-			if(sender.isOp() || (plugin.isUsingPermissions() && sender.hasPermission("cc-essentials.life.get"))) {
-				if(args.length == 1) {
-					if(CCEssentialsLibrary.isPlayer(args[0])) {
-						Player p = CCEssentialsLibrary.getPlayer(args[0]);
-						sender.sendMessage(ChatColor.GRAY+CCEssentialsLibrary.getPlayerName(p)+ChatColor.GRAY+" has "+ChatColor.RED+p.getHealth()+ChatColor.GRAY+" HP.");
-					}
-					else {
-						sender.sendMessage(CCEssentialsLibrary.getPlayerNotFoundSentence(args[0]));
-					}
-				}
-				else if(args.length == 2) {
-					if(!CCEssentialsLibrary.isPlayer(args[0])) {
-						sender.sendMessage(ChatColor.RED+"Nope! Usage: /life [player] [get|set|add|remove] amount");
-					}
-					else if(args[1].equalsIgnoreCase("get")) {
-						Player p = CCEssentialsLibrary.getPlayer(args[0]);
-						sender.sendMessage(ChatColor.GRAY+CCEssentialsLibrary.getPlayerName(p)+ChatColor.GRAY+" has "+ChatColor.RED+p.getHealth()+ChatColor.GRAY+" HP.");
-					}
-					else if(!(args[1].equalsIgnoreCase("set") || args[1].equalsIgnoreCase("add") || args[1].equalsIgnoreCase("remove"))) {
-						sender.sendMessage(ChatColor.RED+"Nope! Usage: /life "+args[0]+" [get|set|add|remove] amount");
-					}
-					else {
-						sender.sendMessage(ChatColor.RED+"Nope! Usage: /life "+args[0]+" "+args[1]+" amount");
-					}
-				}
-				else if (args.length == 3) {
-					if(!CCEssentialsLibrary.isPlayer(args[0])) {
-						sender.sendMessage(CCEssentialsLibrary.getPlayerNotFoundSentence(args[0]));
-					}
-					else if(!(args[1].equalsIgnoreCase("set") || args[1].equalsIgnoreCase("get") || args[1].equalsIgnoreCase("remove") || args[1].equalsIgnoreCase("add"))) {
-						sender.sendMessage(ChatColor.RED+"Nope! Usage: /life "+args[0]+" [get|set|add|remove] amount");
-					}
-					else {
-						Player p = CCEssentialsLibrary.getPlayer(args[0]);
-						
-						float HPAmount;
-						HPAmount = Float.parseFloat(args[2]);
-						if(args[1].equalsIgnoreCase("set")) {
-							p.setHealth(HPAmount);
-						}
-						else if(args[1].equalsIgnoreCase("add")) {
-							p.setHealth(p.getHealth()+HPAmount);
-						}
-						else if(args[1].equalsIgnoreCase("remove")) {
-							p.setHealth(p.getHealth()-HPAmount);
-						}
-						else {
-							sender.sendMessage(ChatColor.RED+"Nope! Usage: /life [player] [get|set|add|remove] amount");
-						}
-						String msg = ""+ChatColor.RED+HPAmount+ChatColor.GRAY+" HP has been given to ";
-						if(CCEssentialsLibrary.getPlayer(sender) == p) {
-							msg += "you.";
-						}
-						else {
-							msg += CCEssentialsLibrary.getPlayerName(p)+ChatColor.GRAY+".";
-						}
-						sender.sendMessage(msg);
-					}
-				}
-				else {
-					sender.sendMessage(ChatColor.RED+"Nope! Usage: /life [player] [get|set|add|remove] amount");
-				}
-			}
-		}
+	private static String permission = null;
+	private static int neededArguments = 0;
+	private static boolean canConsoleUse = true;
+
+	public LifeCommand(CCEssentialsJavaPlugin plugin, CommandSender sender, Command cmd, String label, String[] args) {
+		super(plugin, sender, cmd, label, args);
 	}
 	
-
-}
-
-/*package fr.cartooncraft.essentials.commands;
-
-import org.bukkit.ChatColor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
-
-import fr.cartooncraft.essentials.CCCommand;
-import fr.cartooncraft.essentials.CCEssentials;
-
-public class LifeCommand extends CCCommand {
-	
-	CCEssentials plugin;
-	
-	public LifeCommand(CCEssentials plugin2, CommandSender sender, String[] args) {
-		plugin = plugin2;
-		if(sender.isOp() || (plugin.isUsingPermissions() && sender.hasPermission("cc-essentials.life.get.self"))) {
-			if(args.length == 0) {
-				if(isPlayer(sender)) {
-					Player p = getPlayer(sender);
-					sender.sendMessage(ChatColor.GRAY+"You have "+ChatColor.RED+p.getHealth()+ChatColor.GRAY+" HP.");
-				}
-				else {
-					sender.sendMessage(senderConsole);
-				}
-			}
-			else if(args.length == 1) {
-				if(isPlayer(args[0])) {
-					Player p = getPlayer(args[0]);
-					sender.sendMessage(ChatColor.GRAY+getPlayerName(p)+ChatColor.GRAY+" has "+ChatColor.RED+p.getHealth()+ChatColor.GRAY+" HP.");
-				}
-				else {
-					sender.sendMessage(getPlayerNotFoundSentence(args[0]));
+	@Override
+	public void executeCommand(CCEssentialsJavaPlugin plugin, CommandSender sender, Command cmd, String label, String[] args) { // To override
+		if(args.length == 0) {
+			if(CCEssentialsLibrary.isPlayer(sender)) {
+				if(hasPermission(sender, "cc-essentials.life.get.self")) {
+					sender.sendMessage(ChatColor.GRAY+"You have "+ChatColor.RED+CCEssentialsLibrary.getPlayer(sender).getHealth()+ChatColor.GRAY+" HP.");
 				}
 			}
 			else {
-				sender.sendMessage(ChatColor.RED+"Nope! Usage: /life <player> [get|set|add|remove] amount");
+				sender.sendMessage(senderConsole);
 			}
 		}
+		else {
+			String playerName;
+			String action;
+			double amount = 0;
+			if(args[args.length - 1].equalsIgnoreCase("get")) {
+				playerName = CCEssentialsLibrary.concatenateAllArgs(Arrays.copyOfRange(args, 0, args.length - 1));
+				action = "get";
+				
+			}
+			else if(args.length >= 2) {
+				if(args[args.length - 2].equalsIgnoreCase("set") || args[args.length - 2].equalsIgnoreCase("add") || args[args.length - 2].equalsIgnoreCase("remove")) {
+					playerName = CCEssentialsLibrary.concatenateAllArgs(Arrays.copyOfRange(args, 0, args.length - 2));
+					action = args[args.length - 2];
+					try {
+						amount = Double.parseDouble(args[args.length - 1]);
+					}
+					catch(Exception e) {
+						sender.sendMessage(ChatColor.RED+"Please insert a valid number!");
+						return;
+					}
+				}
+				else {
+					playerName = CCEssentialsLibrary.concatenateAllArgs(args);
+					action = "get";
+				}
+			}
+			else {
+				playerName = CCEssentialsLibrary.concatenateAllArgs(args);
+				action = "get";
+			}
+			
+			if(!CCEssentialsLibrary.isPlayer(playerName)) {
+				sender.sendMessage(getPlayerNotFoundSentence(playerName));
+				return;
+			}
+			
+			CCEssentialsPlayer p = new CCEssentialsPlayer(CCEssentialsLibrary.getPlayer(playerName));
+			boolean areSamePlayers;
+			String permission;
+			boolean updated = true;
+			
+			if(!CCEssentialsLibrary.isPlayer(sender))
+				areSamePlayers = false;
+			else if(CCEssentialsLibrary.areSamePlayers(CCEssentialsLibrary.getPlayer(sender), p.getPlayer()))
+				areSamePlayers = true;
+			else
+				areSamePlayers = false;
+			
+			if(areSamePlayers)
+				permission = "cc-essentials.life."+action+".self";
+			else
+				permission = "cc-essentials.life."+action+".other";
+			
+			if(hasPermission(sender, permission)) {
+				if(action.equalsIgnoreCase("get"))
+					updated = false;
+				else if(action.equalsIgnoreCase("set"))
+					p.getPlayer().setHealth(amount);
+				else if(action.equalsIgnoreCase("add")) {
+					if(!(p.getPlayer().getHealth()+amount > p.getPlayer().getMaxHealth()))
+						p.getPlayer().setHealth(p.getPlayer().getHealth()+amount);
+					else
+						p.getPlayer().setHealth(p.getPlayer().getMaxHealth());
+				}
+				else if(action.equalsIgnoreCase("remove")) {
+					if(!(p.getPlayer().getHealth()-amount < 0))
+						p.getPlayer().setHealth(p.getPlayer().getHealth()-amount);
+					else
+						p.getPlayer().setHealth(0);
+				}
+				
+				if(areSamePlayers)
+					sender.sendMessage(ChatColor.GRAY+"You have "+(updated ? "now ": "")+ChatColor.RED+p.getPlayer().getHealth()+ChatColor.GRAY+" HP.");
+				else
+					sender.sendMessage(p.getPlayerName()+ChatColor.GRAY+" has "+(updated ? "now ": "")+ChatColor.RED+p.getPlayer().getHealth()+ChatColor.GRAY+" HP.");
+			}
+			else
+				sender.sendMessage(noPermission);
+		}
+		
+		// Donc là faut que je continue avec la prise en charge des pseudos à espaces. Je dois donc
+		// prendre l'avant-dernier paramètre pour get/set/etc et non pas le 2e tout bêtement.
+		// DONE
+	}
+	
+	@Override
+	public String getPermission() {
+		return permission;
 	}
 
-}*/
+
+	@Override
+	public int getNeededArguments() {
+		return neededArguments;
+	}
+
+
+	@Override
+	public boolean canConsoleUse() {
+		return canConsoleUse;
+	}
+
+}

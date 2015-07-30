@@ -6,18 +6,23 @@ import org.bukkit.command.CommandSender;
 
 public abstract class CCEssentialsCommand {
 	
+	private Command cmd;
+	private CCEssentialsJavaPlugin plugin;
+	
 	protected static String noPermission = ""+ChatColor.RESET+ChatColor.RED+"Sorry, you're not allowed to do this.";
 	protected static String senderConsole = ""+ChatColor.RESET+ChatColor.RED+"Sorry, you're a console, you can't do this!";
 	protected static String getPlayerNotFoundSentence(String name) {
 		return ChatColor.RED+"Can't find "+name+". Is he offline?";
 	}
-	protected static String getUsage(Command cmd) {
+	protected String getUsage() {
 		return ChatColor.RED+"Nope! Usage: "+cmd.getUsage();
 	}
 	
-	
 	public CCEssentialsCommand(CCEssentialsJavaPlugin plugin, CommandSender sender, Command cmd, String label, String[] args) {
-		if(!hasPermission(sender, plugin)) {
+		this.cmd = cmd;
+		this.plugin = plugin;
+		
+		if(!hasPermission(sender)) {
 			sender.sendMessage(noPermission);
 			return;
 		}
@@ -26,7 +31,7 @@ public abstract class CCEssentialsCommand {
 			return;
 		}
 		if(args.length < getNeededArguments()) {
-			sender.sendMessage(getUsage(cmd));
+			sender.sendMessage(getUsage());
 			return;
 		}
 		
@@ -35,7 +40,10 @@ public abstract class CCEssentialsCommand {
 	
 	public abstract void executeCommand(CCEssentialsJavaPlugin plugin, CommandSender sender, Command cmd, String label, String[] args);
 	
-	public boolean hasPermission(CommandSender sender, CCEssentialsJavaPlugin plugin) {
+	public boolean hasPermission(CommandSender sender) {
+		if(getPermission() == null)
+			return true;
+		
 		if(sender.isOp())
 			return true;
 		
@@ -44,6 +52,20 @@ public abstract class CCEssentialsCommand {
 			return ccPlayer.hasPermission(getPermission());
 		}
 		else if(sender.hasPermission(getPermission()))
+			return true;
+		else
+			return false;
+	}
+	
+	public boolean hasPermission(CommandSender sender, String permission) {
+		if(sender.isOp())
+			return true;
+		
+		if(CCEssentialsLibrary.isPlayer(sender)) {
+			CCEssentialsPlayer ccPlayer = new CCEssentialsPlayer(CCEssentialsLibrary.getPlayer(sender), plugin);
+			return ccPlayer.hasPermission(permission);
+		}
+		else if(sender.hasPermission(permission))
 			return true;
 		else
 			return false;

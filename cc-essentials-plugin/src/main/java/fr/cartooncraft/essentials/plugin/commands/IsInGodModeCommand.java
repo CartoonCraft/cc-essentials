@@ -1,55 +1,78 @@
 package fr.cartooncraft.essentials.plugin.commands;
 
 import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
+import fr.cartooncraft.essentials.lib.CCEssentialsCommand;
+import fr.cartooncraft.essentials.lib.CCEssentialsJavaPlugin;
 import fr.cartooncraft.essentials.lib.CCEssentialsLibrary;
-import fr.cartooncraft.essentials.plugin.CCEssentials;
+import fr.cartooncraft.essentials.lib.CCEssentialsPlayer;
 
-public class IsInGodModeCommand {
-
-	CCEssentials plugin;
+public class IsInGodModeCommand extends CCEssentialsCommand {
 	
-	public IsInGodModeCommand(CCEssentials plugin2, CommandSender sender, String[] args) {
-		plugin = plugin2;
-		if(sender.isOp() || (plugin.isUsingPermissions() && sender.hasPermission("cc-essentials.isingod"))) {
-			if(args.length == 0) {
+	private static String permission = null;
+	private static int neededArguments = 0;
+	private static boolean canConsoleUse = true;
+
+	public IsInGodModeCommand(CCEssentialsJavaPlugin plugin, CommandSender sender, Command cmd, String label,
+			String[] args) {
+		super(plugin, sender, cmd, label, args);
+	}
+	
+	@Override
+	public void executeCommand(CCEssentialsJavaPlugin plugin, CommandSender sender, Command cmd, String label, String[] args) { // To override
+		if(args.length == 0) {
+			if(hasPermission(sender, "cc-essentials.isingodmode.self")) {
 				if(CCEssentialsLibrary.isPlayer(sender)) {
-					Player p = CCEssentialsLibrary.getPlayer(sender);
-					boolean godMode = CCEssentialsLibrary.getConfigFile(p).getBoolean("godmode", false);
-					if(godMode) {
-						p.sendMessage(ChatColor.GRAY+"You're in godmode.");
-					}
-					else {
-						p.sendMessage(ChatColor.GRAY+"You're not in godmode.");
-					}
+					CCEssentialsPlayer p = new CCEssentialsPlayer(CCEssentialsLibrary.getPlayer(sender));
+					if(p.getGodmode())
+						sender.sendMessage(ChatColor.GRAY+"You're in godmode.");
+					else
+						sender.sendMessage(ChatColor.GRAY+"You're not in godmode.");
 				}
 				else {
 					sender.sendMessage(CCEssentialsLibrary.senderConsole);
 				}
 			}
-			else if(args.length == 1) {
-				if(CCEssentialsLibrary.isPlayer(args[0])) {
-					Player p = CCEssentialsLibrary.getPlayer(args[0]);
-					boolean godMode = CCEssentialsLibrary.getConfigFile(p).getBoolean("godmode", false);
-					if(godMode) {
-						sender.sendMessage(ChatColor.GRAY+CCEssentialsLibrary.getPlayerName(p.getName())+ChatColor.GRAY+" is in godmode.");
-					}
-					else {
-						sender.sendMessage(ChatColor.GRAY+CCEssentialsLibrary.getPlayerName(p.getName())+ChatColor.GRAY+" isn't in godmode.");
-					}
+			else
+				sender.sendMessage(noPermission);
+		}
+		else {
+			if(hasPermission(sender, "cc-essentials.isingodmode.other")) {
+				String playerName = CCEssentialsLibrary.concatenateAllArgs(args);
+				if(CCEssentialsLibrary.isPlayer(playerName)) {
+					CCEssentialsPlayer p = new CCEssentialsPlayer(CCEssentialsLibrary.getPlayer(playerName));
+					if(p.getGodmode())
+						sender.sendMessage(p.getPlayerName()+ChatColor.GRAY+" is in godmode.");
+					else
+						sender.sendMessage(p.getPlayerName()+ChatColor.GRAY+" isn't in godmode.");
 				}
 				else {
-					sender.sendMessage(CCEssentialsLibrary.getPlayerNotFoundSentence(args[0]));;
+					sender.sendMessage(CCEssentialsLibrary.getPlayerNotFoundSentence(playerName));
 				}
 			}
 			else {
-				sender.sendMessage(ChatColor.RED+"Nope! Usage: /isingodmode [player]");
+				sender.sendMessage(noPermission);
+				sender.sendMessage(getUsage());
 			}
 		}
-		else {
-			sender.sendMessage(CCEssentialsLibrary.noPermission);
-		}
+	}
+	
+	@Override
+	public String getPermission() {
+		return permission;
+	}
+
+
+	@Override
+	public int getNeededArguments() {
+		return neededArguments;
+	}
+
+
+	@Override
+	public boolean canConsoleUse() {
+		return canConsoleUse;
 	}
 }

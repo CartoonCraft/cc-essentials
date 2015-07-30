@@ -64,6 +64,14 @@ public class CCEssentialsLibrary extends JavaPlugin {
 		return ConfigManager.get(getConfigFileName(p));
 	}
 	
+	public static boolean inArray(Object[] arr, Object targetValue) {
+		for(Object s : arr){
+			if(s.equals(targetValue))
+				return true;
+		}
+		return false;
+	}
+	
 	public static FileConfiguration getConfigFile(String s) {
 		return ConfigManager.get(s);
 	}

@@ -1,48 +1,58 @@
 package fr.cartooncraft.essentials.plugin.commands;
 
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
+import fr.cartooncraft.essentials.lib.CCEssentialsCommand;
+import fr.cartooncraft.essentials.lib.CCEssentialsJavaPlugin;
 import fr.cartooncraft.essentials.lib.CCEssentialsLibrary;
-import fr.cartooncraft.essentials.plugin.CCEssentials;
 
-public class KillCommand {
-
-	CCEssentials plugin;
+public class KillCommand extends CCEssentialsCommand {
 	
-	public KillCommand(CCEssentials plugin2, CommandSender sender, String[] args) {
-		plugin = plugin2;
-		if(args.length == 1) {
-			if(sender.isOp() || (plugin.isUsingPermissions() && sender.hasPermission("cc-essentials.kill"))) {
-				Player p = CCEssentialsLibrary.getPlayer(args[0]);
-				if(p != null) {
-					p.setHealth(0);
+	public KillCommand(CCEssentialsJavaPlugin plugin, CommandSender sender, Command cmd, String label, String[] args) {
+		super(plugin, sender, cmd, label, args);
+	}
+
+	private static String permission = null;
+	private static int neededArguments = 0;
+	private static boolean canConsoleUse = true;
+	
+	@Override
+	public void executeCommand(CCEssentialsJavaPlugin plugin, CommandSender sender, Command cmd, String label, String[] args) { // To override
+		if(args.length == 0) {
+			new SuicideCommand(plugin, sender, cmd, label, args);
+		}
+		else {
+			if(hasPermission(sender, "cc-essentials.kill")) {
+				String playerName = CCEssentialsLibrary.concatenateAllArgs(args);
+				if(CCEssentialsLibrary.isPlayer(playerName)) {
+					CCEssentialsLibrary.getPlayer(playerName).setHealth(0);
 				}
 				else {
-					sender.sendMessage(CCEssentialsLibrary.getPlayerNotFoundSentence(args[0]));
+					sender.sendMessage(getPlayerNotFoundSentence(playerName));
 				}
 			}
 			else {
-				sender.sendMessage(CCEssentialsLibrary.noPermission);
+				sender.sendMessage(noPermission);
 			}
 		}
-		else if(args.length == 0) {
-			if(sender.isOp() || (plugin.isUsingPermissions() && sender.hasPermission("cc-essentials.suicide"))) {
-				if(CCEssentialsLibrary.isPlayer(sender)) {
-					sender.sendMessage(ChatColor.RED+"Goodbye, good world...");
-					Bukkit.broadcastMessage(""+ChatColor.GRAY+ChatColor.BOLD+CCEssentialsLibrary.getPlayer(sender).getName()+" chose the way of suicide... Rest in peace!");
-					CCEssentialsLibrary.getPlayer(sender).setHealth(0);
-				}
-				else {
-					sender.sendMessage(CCEssentialsLibrary.senderConsole);
-				}
-			}
-		}
-		else {
-			sender.sendMessage(ChatColor.RED+"Nope! Usage: /kill [player]");
-		}
+	}
+	
+	@Override
+	public String getPermission() {
+		return permission;
+	}
+
+
+	@Override
+	public int getNeededArguments() {
+		return neededArguments;
+	}
+
+
+	@Override
+	public boolean canConsoleUse() {
+		return canConsoleUse;
 	}
 	
 

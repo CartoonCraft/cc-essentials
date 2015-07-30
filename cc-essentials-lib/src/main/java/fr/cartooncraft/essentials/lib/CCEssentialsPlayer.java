@@ -1,9 +1,11 @@
 package fr.cartooncraft.essentials.lib;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 public class CCEssentialsPlayer {
 	
@@ -46,6 +48,24 @@ public class CCEssentialsPlayer {
 		return this.getColor()+player.getName();
 	}
 	
+	public void feed() {
+		player.setFoodLevel(20);
+		player.setExhaustion(5F);
+	}
+	
+	public void heal() {
+		feed();
+		player.setHealth(player.getMaxHealth());
+	}
+	
+	public void give(ItemStack stack) {
+		player.getInventory().addItem(stack);
+	}
+	
+	public void spawn() {
+		player.teleport(Bukkit.getWorlds().get(0).getSpawnLocation());
+	}
+	
 	public void sendPrivateMessage(CommandSender from, String message) {
 		String chatMessage = ChatColor.GOLD+"["+CCEssentialsLibrary.getPlayerName(from)+ChatColor.GOLD+"->"+getPlayerName()+ChatColor.GOLD+"] "+ChatColor.RESET+message;
 		from.sendMessage(chatMessage);
@@ -67,6 +87,18 @@ public class CCEssentialsPlayer {
 	
 	public String getLatestCorrespondant() {
 		return getConfigFile().getString("lastCorrespondent", null);
+	}
+	
+	public void setGodmode(boolean b) {
+		getConfigFile().set("godmode", b);
+	}
+	
+	public void toggleGodmode() {
+		setGodmode(!getGodmode());
+	}
+	
+	public boolean getGodmode() {
+		return getConfigFile().getBoolean("godmode", false);
 	}
 	
 }

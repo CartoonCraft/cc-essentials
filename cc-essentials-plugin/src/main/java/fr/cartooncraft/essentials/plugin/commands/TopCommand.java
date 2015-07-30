@@ -1,29 +1,45 @@
 package fr.cartooncraft.essentials.plugin.commands;
 
 import org.bukkit.Location;
+import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import fr.cartooncraft.essentials.lib.CCEssentialsCommand;
+import fr.cartooncraft.essentials.lib.CCEssentialsJavaPlugin;
 import fr.cartooncraft.essentials.lib.CCEssentialsLibrary;
-import fr.cartooncraft.essentials.plugin.CCEssentials;
 
-public class TopCommand {
+public class TopCommand extends CCEssentialsCommand {
 	
-	CCEssentials plugin;
-	public TopCommand(CCEssentials plugin2, CommandSender sender) {
-		plugin = plugin2;
-		if(CCEssentialsLibrary.isPlayer(sender)) {
-			if(sender.isOp() || (plugin.isUsingPermissions() && sender.hasPermission("cc-essentials.top"))) {
-				Player p = CCEssentialsLibrary.getPlayer(sender);
-				p.teleport(new Location(p.getWorld(), p.getLocation().getX(), p.getWorld().getHighestBlockYAt(p.getLocation()), p.getLocation().getZ(), p.getLocation().getYaw(), p.getLocation().getPitch()));
-			}
-			else {
-				sender.sendMessage(CCEssentialsLibrary.noPermission);
-			}
-		}
-		else {
-			sender.sendMessage(CCEssentialsLibrary.senderConsole);
-		}
+	private static String permission = "cc-essentials.top";
+	private static int neededArguments = 0;
+	private static boolean canConsoleUse = false;
+
+	public TopCommand(CCEssentialsJavaPlugin plugin, CommandSender sender, Command cmd, String label, String[] args) {
+		super(plugin, sender, cmd, label, args);
+	}
+	
+	@Override
+	public void executeCommand(CCEssentialsJavaPlugin plugin, CommandSender sender, Command cmd, String label, String[] args) { // To override
+		Player p = CCEssentialsLibrary.getPlayer(sender);
+		p.teleport(new Location(p.getWorld(), p.getLocation().getX(), p.getWorld().getHighestBlockYAt(p.getLocation()), p.getLocation().getZ(), p.getLocation().getYaw(), p.getLocation().getPitch()));
+	}
+	
+	@Override
+	public String getPermission() {
+		return permission;
+	}
+
+
+	@Override
+	public int getNeededArguments() {
+		return neededArguments;
+	}
+
+
+	@Override
+	public boolean canConsoleUse() {
+		return canConsoleUse;
 	}
 
 }
