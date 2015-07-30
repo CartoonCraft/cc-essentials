@@ -3,14 +3,119 @@ package fr.cartooncraft.essentials.plugin.commands;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.World;
+import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import fr.cartooncraft.essentials.lib.CCEssentialsCommand;
+import fr.cartooncraft.essentials.lib.CCEssentialsJavaPlugin;
 import fr.cartooncraft.essentials.lib.CCEssentialsLibrary;
-import fr.cartooncraft.essentials.plugin.CCEssentials;
 
-public class TPAllCommand {
+public class TPAllCommand extends CCEssentialsCommand {
+	
+	private static String permission = null;
+	private static int neededArguments = 0;
+	private static boolean canConsoleUse = true;
+
+	public TPAllCommand(CCEssentialsJavaPlugin plugin, CommandSender sender, Command cmd, String label, String[] args) {
+		super(plugin, sender, cmd, label, args);
+	}
+
+	@Override
+	public void executeCommand(CCEssentialsJavaPlugin plugin, CommandSender sender, Command cmd, String label,
+			String[] args) {
+		Location loc = null;
+		
+		if(args.length == 0) {
+			if(hasPermission(sender, "cc-essentials.tpall.self")) {
+				if(CCEssentialsLibrary.isPlayer(sender))
+					loc = CCEssentialsLibrary.getPlayer(sender).getLocation();
+				else
+					sender.sendMessage(senderConsole);
+			}
+			else
+				sender.sendMessage(noPermission);
+		}
+		else {
+			if(args.length == 3) {
+				if(hasPermission(sender, "cc-essentials.tpall.coords")) {
+					try {
+						areDouble(args);
+					}
+					catch(Exception e) {
+						sender.sendMessage(ChatColor.RED+e.getMessage());
+						return;
+					}
+					
+					Player p = null;
+					if(CCEssentialsLibrary.isPlayer(sender))
+						p = CCEssentialsLibrary.getPlayer(sender);
+					
+					try {
+						loc = TPCommand.getLocation(p, args[0], args[1], args[2]);
+					} catch (Exception e) {
+						sender.sendMessage(ChatColor.RED+e.getMessage());
+					}
+				}
+				else {
+					if(hasPermission(sender, "cc-essentials.tpall.other")) {
+						String playerName = CCEssentialsLibrary.concatenateAllArgs(args);
+						if(CCEssentialsLibrary.isPlayer(playerName))
+							loc = CCEssentialsLibrary.getPlayer(playerName).getLocation();
+						else
+							sender.sendMessage(getPlayerNotFoundSentence(playerName));
+					}
+					else
+						sender.sendMessage(noPermission);
+				}
+			}
+		}
+		
+		if(loc != null) {
+			for(Player p : Bukkit.getOnlinePlayers()) {
+				p.teleport(loc);
+			}
+		}
+		return;
+	}
+	
+	public static boolean isDouble(String d) {
+		try {
+			Double.parseDouble(d);
+			return true;
+		}
+		catch(Exception e) {
+			return false;
+		}
+	}
+	
+	public static boolean areDouble(String[] d) throws Exception {
+		for(String d2 : d) {
+			if(!isDouble(d2)) {
+				throw new Exception(TPCommand.getNotValidNumberMessage(d2));
+			}
+		}
+		return true;
+	}
+
+	@Override
+	public String getPermission() {
+		return permission;
+	}
+
+	@Override
+	public int getNeededArguments() {
+		return neededArguments;
+	}
+
+	@Override
+	public boolean canConsoleUse() {
+		return canConsoleUse;
+	}
+	
+}
+
+/*public class TPAllCommand {
 
 	CCEssentials plugin;
 	public TPAllCommand(CCEssentials plugin2, CommandSender sender, String[] args) {
@@ -71,4 +176,4 @@ public class TPAllCommand {
 		}
 	}
 
-}
+}*/

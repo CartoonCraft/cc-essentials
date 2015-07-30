@@ -95,6 +95,13 @@ public class CCEssentials extends CCEssentialsJavaPlugin {
 		permissionsManager.setPermission(new CCEssentialsPermission("cc-essentials.kick", false));
 		permissionsManager.setPermission(new CCEssentialsPermission("cc-essentials.kickall", false));
 		permissionsManager.setPermission(new CCEssentialsPermission("cc-essentials.kickall.op", false));
+		permissionsManager.setPermission(new CCEssentialsPermission("cc-essentials.teleport.self.player", false));
+		permissionsManager.setPermission(new CCEssentialsPermission("cc-essentials.teleport.self.coords", false));
+		permissionsManager.setPermission(new CCEssentialsPermission("cc-essentials.teleport.other.player", false));
+		permissionsManager.setPermission(new CCEssentialsPermission("cc-essentials.teleport.other.coords", false));
+		permissionsManager.setPermission(new CCEssentialsPermission("cc-essentials.tpall.self", false));
+		permissionsManager.setPermission(new CCEssentialsPermission("cc-essentials.tpall.other", false));
+		permissionsManager.setPermission(new CCEssentialsPermission("cc-essentials.tpall.coords", false));
 	}
 	
 	public void onDisable() {
@@ -119,7 +126,7 @@ public class CCEssentials extends CCEssentialsJavaPlugin {
 		else if(cmd.getName().equalsIgnoreCase("top"))
 			new TopCommand(this, sender, cmd, label, args);
 		else if(cmd.getName().equalsIgnoreCase("tp"))
-			new TPCommand(this, sender, args);
+			new TPCommand(this, sender, cmd, label, args);
 		else if(cmd.getName().equalsIgnoreCase("kill"))
 			new KillCommand(this, sender, cmd, label, args);
 		else if(cmd.getName().equalsIgnoreCase("xp"))
@@ -137,7 +144,7 @@ public class CCEssentials extends CCEssentialsJavaPlugin {
 		else if(cmd.getName().equalsIgnoreCase("feed"))
 			new FeedCommand(this, sender, cmd, label, args);
 		else if(cmd.getName().equalsIgnoreCase("tpall"))
-			new TPAllCommand(this, sender, args);
+			new TPAllCommand(this, sender, cmd, label, args);
 		else if(cmd.getName().equalsIgnoreCase("kickall"))
 			new KickallCommand(this, sender, cmd, label, args);
 		else if(cmd.getName().equalsIgnoreCase("healall"))
